@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>BEMP - Burundi Environmental Monitoring Platform</title>
+  </head>
+  <body>
+    <!-- Sidebar Toggle Checkbox (hidden) -->
+    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle" />
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <div class="topbar-left">
+        <label for="sidebar-toggle" class="toggle-btn">
+          <i class="fas fa-bars"></i>
+        </label>
+        <h1 class="topbar-title">BEMP</h1>
+      </div>
+      <div class="topbar-right">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search..." />
+        </div>
+        <div class="user-profile">
+          <i class="fas fa-bell"></i>
+          <div class="avatar">AR</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>BEMP</span>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a href="#" class="menu-item active" data-label="Dashboard">
+          <i class="fas fa-chart-line"></i>
+          <span class="label">Dashboard</span>
+        </a>
+        <a href="#" class="menu-item" data-label="Map">
+          <i class="fas fa-map"></i>
+          <span class="label">Map</span>
+        </a>
+        <a href="#" class="menu-item" data-label="Merchants">
+          <i class="fas fa-users"></i>
+          <span class="label">Merchants</span>
+        </a>
+        <a href="#" class="menu-item" data-label="Transactions">
+          <i class="fas fa-exchange-alt"></i>
+          <span class="label">Transactions</span>
+        </a>
+        <a href="#" class="menu-item" data-label="Analytics">
+          <i class="fas fa-chart-pie"></i>
+          <span class="label">Analytics</span>
+        </a>
+        <a href="#" class="menu-item" data-label="Settings">
+          <i class="fas fa-cog"></i>
+          <span class="label">Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="#" class="menu-item" data-label="Logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span class="label">Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div id="map" class="map-container">
+        <!-- Interactive map will go here -->
+        <div class="map-placeholder">
+          <i class="fas fa-map"></i>
+          <p>Interactive Map</p>
+          <small>Map integration coming soon...</small>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
