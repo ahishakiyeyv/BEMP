@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 /* ============================================
    VARIABLES & RESET
    ============================================ */
@@ -22,9 +24,7 @@
 }
 
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
+  font-family: "Montserrat", sans-serif;
   background-color: var(--bg-light);
   color: var(--text-dark);
   overflow: hidden;
@@ -46,8 +46,8 @@ body {
   left: 0;
   right: 0;
   height: var(--topbar-height);
-  background: white;
-  border-bottom: 1px solid var(--border-color);
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,24 +56,40 @@ body {
   box-shadow: var(--shadow);
 }
 
-.topbar-left {
+.topbar-left,
+.topbar-right,
+.topbar-center {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
+.topbar-left {
+  flex: 1;
+}
+
+.topbar-center {
+  flex: 0.9;
+  justify-content: center;
+}
+
+.topbar-right {
+  flex: 1;
+  justify-content: flex-end;
+}
+
 .toggle-btn {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   color: var(--text-dark);
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 12px;
   transition: background-color var(--transition-speed) ease;
 }
 
@@ -81,28 +97,16 @@ body {
   background-color: var(--bg-light);
 }
 
-.topbar-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--primary-color);
-  letter-spacing: 1px;
-}
-
-.topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
 .search-box {
   display: flex;
   align-items: center;
-  gap: 10px;
-  background-color: var(--bg-light);
-  padding: 8px 15px;
-  border-radius: 20px;
+  gap: 12px;
+  background-color: #f3f4f6;
+  padding: 12px 18px;
+  border-radius: 18px;
   flex: 1;
-  max-width: 300px;
+  max-width: 420px;
+  min-width: 280px;
 }
 
 .search-box i {
@@ -112,10 +116,10 @@ body {
 
 .search-box input {
   border: none;
-  background: none;
+  background: transparent;
   outline: none;
   color: var(--text-dark);
-  font-size: 14px;
+  font-size: 15px;
   width: 100%;
 }
 
@@ -123,32 +127,115 @@ body {
   color: var(--text-light);
 }
 
-.user-profile {
+.topbar-info {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 16px;
+  background: rgba(249, 250, 251, 0.9);
+  padding: 10px 18px;
+  border-radius: 24px;
 }
 
-.user-profile i {
-  font-size: 20px;
-  color: var(--text-dark);
+.topbar-date {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.location-btn,
+.topbar-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
-  transition: color var(--transition-speed) ease;
+  transition:
+    border-color var(--transition-speed) ease,
+    color var(--transition-speed) ease,
+    background var(--transition-speed) ease;
 }
 
-.user-profile i:hover {
+.location-btn i,
+.topbar-action i {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.location-btn:hover,
+.topbar-action:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: #f8fafc;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.notification-btn {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #374151;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-speed) ease,
+    color var(--transition-speed) ease;
+}
+
+.notification-btn:hover {
+  border-color: var(--primary-color);
   color: var(--primary-color);
 }
 
+.notification-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ef4444;
+  border: 2px solid #ffffff;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+}
+
+.user-name {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .avatar {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, var(--primary-color), #9f7aea);
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--primary-color), #8b5cf6);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #ffffff;
   font-weight: 700;
   cursor: pointer;
   font-size: 14px;
