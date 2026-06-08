@@ -1,0 +1,11 @@
+.popup h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #87c9e0;
+}
+.popup p {
+  font-size: 0.9rem;
+  margin: 0;
+  color: #555;
+}
