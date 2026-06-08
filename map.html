@@ -7,8 +7,12 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+    />
     <link rel="stylesheet" href="css/style.css" />
-    <title>BEMP - Burundi Environmental Monitoring Platform</title>
+    <title>Maps - BEMP</title>
   </head>
   <body>
     <!-- Sidebar Toggle Checkbox (hidden) -->
@@ -50,7 +54,7 @@
           <span class="notification-badge"></span>
         </button>
         <div class="user-profile">
-          <span class="user-name">E. Bigirimana</span>
+          <span class="user-name">Y.I Ahishakiye</span>
           <div class="avatar">EB</div>
         </div>
       </div>
@@ -64,11 +68,11 @@
       </div>
 
       <nav class="sidebar-menu">
-        <a href="#" class="menu-item active" data-label="Dashboard">
+        <a href="index.html" class="menu-item" data-label="Dashboard">
           <i class="fas fa-chart-line"></i>
           <span class="label">Dashboard</span>
         </a>
-        <a href="map.html" class="menu-item" data-label="Map">
+        <a href="map.html" class="menu-item active" data-label="Map">
           <i class="fas fa-map"></i>
           <span class="label">Map</span>
         </a>
@@ -100,16 +104,11 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <div id="map" class="map-container">
-        <!-- Interactive map will go here -->
-        <div class="map-placeholder">
-          <i class="fas fa-map"></i>
-          <p>Go to Map Section</p>
-          <small>Map integration coming soon...</small>
-        </div>
-      </div>
+      <div id="map" class="map-container"></div>
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/map.js"></script>
   </body>
 </html>
