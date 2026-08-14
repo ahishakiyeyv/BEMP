@@ -1,12 +1,13 @@
 :root {
   --primary-color: #5856d6;
-  --sidebar-width: 250px;
+  --secondary-color: #ffffff;
   --sidebar-collapsed-width: 80px;
   --sidebar-left-bg-color: #081e25;
   --topbar-height: 70px;
   --transition-speed: 0.3s;
   --bg-dark: #1e1e2e;
   --bg-light: #f5f5f5;
+  --bg-sidebar: #f5fafa;
   --bg-menu-link: #172c33;
   --text-dark: #333;
   --text-light: #666;
@@ -338,12 +339,13 @@ body {
   position: fixed;
   top: 0;
   right: 0;
-  overflow-y: auto;
+  overflow: auto;
   width: 20%;
   height: 100%;
   border: 1px solid green;
   height: calc(100vh - var(--topbar-height));
   margin-top: var(--topbar-height);
+  background-color: var(--bg-sidebar);
 }
 
 .parent {
@@ -357,28 +359,40 @@ body {
   grid-row-start: 1;
   height: 150px;
   width: 100%;
-  border: 1px solid red;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
+  background-color: var(--secondary-color);
 }
 .div2 {
   grid-row-start: 1;
   height: 150px;
   width: 100%;
-  border: 1px solid blue;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
+  background-color: var(--secondary-color);
 }
 .div3 {
   grid-row-start: 2;
   height: 150px;
   width: 100%;
-  border: 1px solid green;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
+  background-color: var(--secondary-color);
 }
 
 .div4 {
   grid-row-start: 2;
   height: 150px;
   width: 100%;
-  border: 1px solid red;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
+  background-color: var(--secondary-color);
+}
+.container1 {
+  height: 200px;
+  border: 1px solid var(--border-color);
+  margin: 15px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  background-color: var(--secondary-color);
 }
