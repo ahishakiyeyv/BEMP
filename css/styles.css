@@ -247,7 +247,6 @@ body {
   top: 0;
   width: 20%;
   height: calc(100vh);
-  border: 1px solid red;
   background-color: var(--sidebar-left-bg-color);
 }
 .sidebar-head {
@@ -277,6 +276,11 @@ body {
   color: #f3f3f3;
   font-size: 15px;
   font-weight: 400;
+}
+.sidebar-menu .active {
+  background-color: var(--bg-menu-link);
+  color: var(--bg-light);
+  border-radius: 8px;
 }
 .sidebar-menu h3 {
   font-size: 14px;
@@ -325,7 +329,6 @@ body {
   left: 20%;
   width: 60%;
   height: 100%;
-  border: 1px solid blue;
   height: calc(100vh - var(--topbar-height));
   margin-top: var(--topbar-height);
 }
@@ -342,7 +345,6 @@ body {
   overflow: auto;
   width: 20%;
   height: 100%;
-  border: 1px solid green;
   height: calc(100vh - var(--topbar-height));
   margin-top: var(--topbar-height);
   background-color: var(--bg-sidebar);
@@ -356,37 +358,129 @@ body {
   margin: 15px;
 }
 .div1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   grid-row-start: 1;
   height: 150px;
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background-color: var(--secondary-color);
+  padding: 10px;
 }
+.div1 i {
+  font-size: 18px;
+  color: red;
+}
+.div1 .number {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--primary-text);
+}
+.div1 .title-box {
+  font-size: 14px;
+  color: var(--primary-text);
+  font-weight: 400;
+}
+.div1 .txt-box {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
 .div2 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   grid-row-start: 1;
   height: 150px;
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background-color: var(--secondary-color);
+  padding: 10px;
+  text-transform: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.div2 i {
+  font-size: 18px;
+  color: gray;
+}
+.div2 .number {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--primary-text);
+}
+.div2 .title-box {
+  font-size: 14px;
+  color: var(--primary-text);
+  font-weight: 400;
+}
+.div2 .txt-box {
+  font-size: 12px;
+  color: var(--text-light);
 }
 .div3 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   grid-row-start: 2;
   height: 150px;
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background-color: var(--secondary-color);
+  padding: 10px;
+}
+.div3 i {
+  font-size: 18px;
+  color: green;
+}
+.div3 .number {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--primary-text);
+}
+.div3 .title-box {
+  font-size: 14px;
+  color: var(--primary-text);
+  font-weight: 400;
+}
+.div3 .txt-box {
+  font-size: 12px;
+  color: var(--text-light);
 }
 
 .div4 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   grid-row-start: 2;
   height: 150px;
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background-color: var(--secondary-color);
+  padding: 10px;
+}
+.div4 i {
+  font-size: 18px;
+  color: blue;
+}
+.div4 .number {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--primary-text);
+}
+.div4 .title-box {
+  font-size: 14px;
+  color: var(--primary-text);
+  font-weight: 400;
+}
+.div4 .txt-box {
+  font-size: 12px;
+  color: var(--text-light);
 }
 .container1 {
   height: 200px;

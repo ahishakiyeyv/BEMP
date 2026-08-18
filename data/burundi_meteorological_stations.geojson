@@ -1,0 +1,209 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bujumbura Aero",
+        "wigos_id": "0-108-0-64404",
+        "type": "Synoptic Station",
+        "elevation_m": 783,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.31,
+          -3.31
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gitega-Burundi",
+        "wigos_id": "0-108-0-64391",
+        "type": "Synoptic Station",
+        "elevation_m": 1645,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.93,
+          -3.43
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Muyinga",
+        "wigos_id": "0-20000-0-64397",
+        "type": "Synoptic Station",
+        "elevation_m": 1755,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.33,
+          -2.83
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Cibitoke",
+        "wigos_id": "N/A",
+        "type": "Agrometeorological Station",
+        "elevation_m": 930,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.12,
+          -2.89
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gashikanwa",
+        "wigos_id": "N/A",
+        "type": "Agrometeorological Station",
+        "elevation_m": 1692,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.93,
+          -2.81
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Gisozi",
+        "wigos_id": "N/A",
+        "type": "Agrometeorological Station",
+        "elevation_m": 2090,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.68,
+          -3.56
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Karuzi",
+        "wigos_id": "N/A",
+        "type": "Agrometeorological Station",
+        "elevation_m": 1600,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.16,
+          -3.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kayanza",
+        "wigos_id": "N/A",
+        "type": "Agrometeorological Station",
+        "elevation_m": 1950,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.63,
+          -2.92
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Muramvya",
+        "wigos_id": "N/A",
+        "type": "Agrometeorological Station",
+        "elevation_m": 1893,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.62,
+          -3.26
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nyabiraba",
+        "wigos_id": "N/A",
+        "type": "Agrometeorological Station",
+        "elevation_m": 1700,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.47,
+          -3.48
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Rutana",
+        "wigos_id": "N/A",
+        "type": "Agrometeorological Station",
+        "elevation_m": 1720,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          29.99,
+          -3.92
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ruyigi",
+        "wigos_id": "N/A",
+        "type": "Agrometeorological Station",
+        "elevation_m": 1750,
+        "status": "Operational"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          30.25,
+          -3.48
+        ]
+      }
+    }
+  ]
+}
