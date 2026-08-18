@@ -147,7 +147,7 @@
         },
       ).addTo(map);
 
-      //fetch a map of burundi borders and add to the map
+      //fetch a map of burundi borders and display a popup with country information
       fetch("data/burundi.geojson")
         .then((response) => response.json())
         .then((data) => {
@@ -158,6 +158,52 @@
               opacity: 1,
               fillColor: "#5250C9",
               fillOpacity: 0.2,
+            },
+            onEachFeature: function (feature, layer) {
+              const popupHTML = `
+                <div class="country-popup">
+                  <div class="country-popup-header">
+                    <h3 class="country-name">${feature.properties.NAME_0}</h3>
+                  </div>
+                  <div class="country-popup-body">
+                    <div class="popup-section">
+                      <h4 class="section-title">Geographic Information</h4>
+                      <div class="popup-field">
+                        <span class="popup-label"><i class="fas fa-map"></i> Area</span>
+                        <span class="popup-value">${feature.properties.SQKM.toLocaleString()} km²</span>
+                      </div>
+                      <div class="popup-field">
+                        <span class="popup-label"><i class="fas fa-globe"></i> Region 1</span>
+                        <span class="popup-value">${feature.properties.UNREGION1}</span>
+                      </div>
+                      <div class="popup-field">
+                        <span class="popup-label"><i class="fas fa-earth-americas"></i> Region 2</span>
+                        <span class="popup-value">${feature.properties.UNREGION2}</span>
+                      </div>
+                    </div>
+                    <div class="popup-section">
+                      <h4 class="section-title">Population Data</h4>
+                      <div class="popup-field">
+                        <span class="popup-label"><i class="fas fa-users"></i> Pop. 2000</span>
+                        <span class="popup-value">${feature.properties.POP2000.toLocaleString()}</span>
+                      </div>
+                      <div class="popup-field">
+                        <span class="popup-label"><i class="fas fa-users"></i> Pop. 2024</span>
+                        <span class="popup-value">${feature.properties.POP2024.toLocaleString()}</span>
+                      </div>
+                      <div class="popup-field">
+                        <span class="popup-label"><i class="fas fa-mars"></i> Male</span>
+                        <span class="popup-value">${feature.properties.POP_MALE.toLocaleString()} (${feature.properties.MALE_PERCENTAGE}%)</span>
+                      </div>
+                      <div class="popup-field">
+                        <span class="popup-label"><i class="fas fa-venus"></i> Female</span>
+                        <span class="popup-value">${feature.properties.POP_FEMALE.toLocaleString()} (${feature.properties.FEMALE_PERCENTAGE}%)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+              layer.bindPopup(popupHTML);
             },
           }).addTo(map);
         })

@@ -144,6 +144,56 @@ body {
   flex: 1;
 }
 
+/* Country Popup Container */
+.country-popup {
+  min-width: 360px;
+  overflow: hidden;
+}
+
+.country-popup-header {
+  background: linear-gradient(135deg, #5250c9 0%, #6d5fe3 100%);
+  padding: 18px 20px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.country-name {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  flex: 1;
+}
+
+.country-popup-body {
+  padding: 12px 20px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.popup-section {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.popup-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.section-title {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  letter-spacing: 0.5px;
+}
+
 /* ============================================
    TOPBAR
    ============================================ */
