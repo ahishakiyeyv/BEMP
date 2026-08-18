@@ -33,3 +33,21 @@ document.addEventListener("DOMContentLoaded", updateDateTime);
 
 // Update every minute
 setInterval(updateDateTime, 60000);
+
+//add animation on the counting the number of stations from 1-12 and manage the speed of the animation
+
+function animateNumber(element, start, end, duration) {
+  var range = end - start;
+  var current = start;
+  var increment = end > start ? 1 : -1;
+  var stepTime = Math.abs(Math.floor(duration / range));
+  var obj = element;
+  var timer = setInterval(function () {
+    current += increment;
+    obj.textContent = current;
+    if (current == end) {
+      clearInterval(timer);
+    }
+  }, stepTime);
+}
+

@@ -153,9 +153,11 @@
         .then((data) => {
           L.geoJSON(data, {
             style: {
-              color: "#ff7800",
-              weight: 2,
-              opacity: 0.65,
+              color: "#5250C9",
+              weight: 3,
+              opacity: 1,
+              fillColor: "#5250C9",
+              fillOpacity: 0.2,
             },
           }).addTo(map);
         })
@@ -165,22 +167,40 @@
       fetch("data/burundi_meteorological_stations.geojson")
         .then((response) => response.json())
         .then((data) => {
+          const stationCount = data.features.length;
+          const stationCountElement = document.querySelector(".div2 .number");
+          if (stationCountElement) {
+            animateNumber(stationCountElement, 0, stationCount, 2000);
+          }
           L.geoJSON(data, {
             onEachFeature: function (feature, layer) {
-              layer.bindPopup(
-                "<strong>Station Name:</strong> " +
-                  feature.properties.name +
-                  "<br><strong>Type:</strong> " +
-                  feature.properties.type +
-                  "<br><strong>Elevation:</strong> " +
-                  feature.properties.elevation_m +
-                  "<br><strong>Status:</strong> " +
-                  feature.properties.status,
-              );
+              const statusClass = feature.properties.status
+                .toLowerCase()
+                .replace(/\s+/g, "-");
+              const popupHTML = `
+                <div class="station-popup">
+                  <div class="station-popup-header">
+                    <h3 class="station-name">${feature.properties.name}</h3>
+                    <span class="station-status ${statusClass}">${feature.properties.status}</span>
+                  </div>
+                  <div class="station-popup-body">
+                    <div class="popup-field">
+                      <span class="popup-label"><i class="fas fa-thermometer"></i> Type</span>
+                      <span class="popup-value">${feature.properties.type}</span>
+                    </div>
+                    <div class="popup-field">
+                      <span class="popup-label"><i class="fas fa-mountain"></i> Elevation</span>
+                      <span class="popup-value">${feature.properties.elevation_m} m</span>
+                    </div>
+                  </div>
+                </div>
+              `;
+              layer.bindPopup(popupHTML);
             },
           }).addTo(map);
         })
         .catch((error) => console.error("Error loading GeoJSON data:", error));
     </script>
+    <script src="js/utils.js"></script>
   </body>
 </html>
