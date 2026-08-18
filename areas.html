@@ -67,7 +67,7 @@
               >
             </li>
             <li>
-              <a class="menu-item" href="areas.html"
+              <a class="menu-item" href="new-province.html"
                 ><i class="fa-solid fa-earth-europe"></i> New Provinces</a
               >
             </li>
@@ -109,6 +109,48 @@
           attribution: "&copy; OpenStreetMap contributors",
         },
       ).addTo(map);
+      //fetch a map of burundi borders
+      fetch("data/burundi.geojson")
+        .then((response) => response.json())
+        .then((data) => {
+          L.geoJSON(data).addTo(map);
+        });
+
+      //fetch a map of protected areas
+      fetch("data/National_Parks.geojson")
+        .then((response) => response.json())
+        .then((data) => {
+          L.geoJSON(data, {
+            onEachFeature: function (feature, layer) {
+              const popupHTML = `
+                <div class="station-popup">
+                  <div class="station-popup-header">
+                    <h3 class="station-name">${feature.properties.DESIG_ENG}</h3>
+                  </div>
+                  <div class="station-popup-body">
+                    <div class="popup-field">
+                      <span class="popup-label"><i class="fas fa-mountain"></i> Name</span>
+                      <span class="popup-value">${feature.properties.NAME}</span>
+                    </div>
+                    <div class="popup-field">
+                      <span class="popup-label"><i class="fas fa-thermometer"></i>Size Area:</span>
+                      <span class="popup-value">${feature.properties.REP_AREA} km²</span>
+                    </div>
+                    
+                  </div>
+                </div>
+              `;
+              layer.bindPopup(popupHTML);
+            },
+            style: function (feature) {
+              return {
+                color: "green",
+                weight: 2,
+                fillOpacity: 0.5,
+              };
+            },
+          }).addTo(map);
+        });
     </script>
   </body>
 </html>

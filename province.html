@@ -109,6 +109,44 @@
           attribution: "&copy; OpenStreetMap contributors",
         },
       ).addTo(map);
+
+      // fetch the provinces GeoJSON data and add it to the map
+      fetch("data/country.geojson")
+        .then((response) => response.json())
+        .then((data) => {
+          L.geoJSON(data, {
+            onEachFeature: function (feature, layer) {
+              const popupHTML = `
+                <div class="station-popup">
+                  <div class="station-popup-header">
+                    <h3 class="station-name">${feature.properties.NAME_1} Province</h3>
+                  </div>
+                  <div class="station-popup-body">
+                    <div class="popup-field">
+                      <span class="popup-label"><i class="fas fa-thermometer"></i> Type</span>
+                      <span class="popup-value">${feature.properties.type}</span>
+                    </div>
+                    <div class="popup-field">
+                      <span class="popup-label"><i class="fas fa-mountain"></i> Elevation</span>
+                      <span class="popup-value">${feature.properties.elevation_m} m</span>
+                    </div>
+                  </div>
+                </div>
+              `;
+              layer.bindPopup(popupHTML);
+            },
+            style: function (feature) {
+              return {
+                color: "#3388ff",
+                weight: 2,
+                opacity: 1,
+                fillColor: "#3388ff", // Set the fill color to blue
+                fillOpacity: 0.2,
+              };
+            },
+          }).addTo(map);
+        });
     </script>
+    <script src="js/utils.js"></script>
   </body>
 </html>

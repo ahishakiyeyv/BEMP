@@ -109,6 +109,29 @@
           attribution: "&copy; OpenStreetMap contributors",
         },
       ).addTo(map);
+
+      //fetch a map of burundi borders
+      fetch("data/burundi.geojson")
+        .then((response) => response.json())
+        .then((data) => {
+          L.geoJSON(data).addTo(map);
+        });
+
+      // fetch the GeoJSON data and add it to the map
+      fetch("data/Lakes.geojson")
+        .then((response) => response.json())
+        .then((data) => {
+          L.geoJSON(data, {
+            style: function (feature) {
+              return {
+                color: "blue",
+                weight: 2,
+                fillOpacity: 0.5,
+              };
+            },
+          }).addTo(map);
+        });
     </script>
+    <script src="js/utils.js"></script>
   </body>
 </html>
