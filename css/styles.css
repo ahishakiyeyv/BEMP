@@ -639,6 +639,24 @@ body {
   font-size: 12px;
   color: var(--text-light);
 }
+.container0 {
+  height: auto;
+  border: 1px solid var(--border-color);
+  margin: 15px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  background-color: var(--secondary-color);
+  padding: 10px;
+}
+.container0 .content-footer .txt2 {
+  color: #2581c1;
+  background-color: transparent;
+  border: none;
+}
+.container0 .box-container i {
+  color: #2581c1;
+  background-color: #e6f0f8;
+}
 .container1 {
   height: auto;
   border: 1px solid var(--border-color);
@@ -656,11 +674,11 @@ body {
   margin-bottom: 10px;
 }
 .box-container i {
-  font-size: 14px;
-  color: var(--primary-color);
-  background-color: rgb(216, 246, 216);
+  font-size: 12px;
+  color: #26984d;
+  background-color: #e7f2ea;
   padding: 8px;
-  border-radius: 50%;
+  border-radius: 20%;
 }
 .box-container h2 {
   font-size: 14px;
@@ -669,7 +687,7 @@ body {
   text-transform: uppercase;
 }
 .content .box-txt {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
   color: var(--text-light);
 }
@@ -686,10 +704,115 @@ body {
 .content-footer .txt2 {
   font-size: 12px;
   color: var(--text-light);
-  font-weight: bold;
+  font-weight: 300;
   border: 0.5px solid var(--border-color);
   padding: 5px;
   border-radius: 8px;
   background-color: rgb(248, 228, 190);
   color: orange;
+}
+.container2 {
+  height: auto;
+  border: 1px solid var(--border-color);
+  margin: 15px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  background-color: var(--secondary-color);
+  padding: 10px;
+}
+.container2 i {
+  font-size: 12px;
+  color: #2581c1;
+  background-color: #e6f0f8;
+  padding: 8px;
+  border-radius: 20%;
+}
+.container2 .content-footer .txt2 {
+  color: red;
+  background-color: transparent;
+  border: none;
+  font-weight: 300;
+}
+.container3 {
+  height: auto;
+  border: 1px solid var(--border-color);
+  margin: 15px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  background-color: var(--secondary-color);
+  padding: 10px;
+}
+.container3 i {
+  font-size: 12px;
+  color: #4483cd;
+  background-color: #e8f0f9;
+  padding: 8px;
+  border-radius: 20%;
+}
+.container3 .content .subtxt {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.bottom-content {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+}
+
+.label {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.value {
+  font-size: 12px;
+  color: #111827;
+  font-weight: 600;
+}
+
+/* Progress Bar Base */
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background-color: #f3f4f6;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+}
+
+/* Row-specific Bar Colors & Widths */
+.flood {
+  width: 38%;
+  background-color: #d92d20; /* Red */
+}
+
+.landslide {
+  width: 24%;
+  background-color: #e06616; /* Orange */
+}
+
+.drought {
+  width: 35%;
+  background-color: #d99b1c; /* Yellow/Gold */
 }
