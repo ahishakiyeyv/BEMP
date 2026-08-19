@@ -6,16 +6,15 @@
       "properties": {
         "name": "Bujumbura Aero",
         "wigos_id": "0-108-0-64404",
+        "network": "Meteorological",
         "type": "Synoptic Station",
         "elevation_m": 783,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Imbo Plain / Lake Tanganyika"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          29.31,
-          -3.31
-        ]
+        "coordinates": [29.31, -3.31]
       }
     },
     {
@@ -23,16 +22,15 @@
       "properties": {
         "name": "Gitega-Burundi",
         "wigos_id": "0-108-0-64391",
+        "network": "Meteorological",
         "type": "Synoptic Station",
         "elevation_m": 1645,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Ruvubu"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          29.93,
-          -3.43
-        ]
+        "coordinates": [29.93, -3.43]
       }
     },
     {
@@ -40,169 +38,255 @@
       "properties": {
         "name": "Muyinga",
         "wigos_id": "0-20000-0-64397",
+        "network": "Meteorological",
         "type": "Synoptic Station",
         "elevation_m": 1755,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Northeastern Plateau"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          30.33,
-          -2.83
-        ]
+        "coordinates": [30.33, -2.83]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Cibitoke",
-        "wigos_id": "N/A",
-        "type": "Agrometeorological Station",
+        "wigos_id": "0-108-0-64398",
+        "network": "Meteorological",
+        "type": "Agrometeorological",
         "elevation_m": 930,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Ruzizi Plain"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          29.12,
-          -2.89
-        ]
+        "coordinates": [29.12, -2.89]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Gashikanwa",
-        "wigos_id": "N/A",
-        "type": "Agrometeorological Station",
+        "wigos_id": "0-108-0-64402",
+        "network": "Meteorological",
+        "type": "Agrometeorological",
         "elevation_m": 1692,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Northern Plateau"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          29.93,
-          -2.81
-        ]
+        "coordinates": [29.93, -2.81]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Gisozi",
-        "wigos_id": "N/A",
-        "type": "Agrometeorological Station",
-        "elevation_m": 2090,
-        "status": "Operational"
+        "wigos_id": "0-108-0-64451",
+        "network": "Meteorological",
+        "type": "Agrometeorological",
+        "elevation_m": 2097,
+        "status": "Operational",
+        "basin": "Central Highlands"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          29.68,
-          -3.56
-        ]
+        "coordinates": [29.68, -3.56]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Karuzi",
-        "wigos_id": "N/A",
-        "type": "Agrometeorological Station",
+        "wigos_id": "0-108-0-64403",
+        "network": "Meteorological",
+        "type": "Agrometeorological",
         "elevation_m": 1600,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Ruvubu"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          30.16,
-          -3.1
-        ]
+        "coordinates": [30.16, -3.1]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Kayanza",
-        "wigos_id": "N/A",
-        "type": "Agrometeorological Station",
+        "wigos_id": "0-108-0-64399",
+        "network": "Meteorological",
+        "type": "Agrometeorological",
         "elevation_m": 1950,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Nile Headwaters"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          29.63,
-          -2.92
-        ]
+        "coordinates": [29.63, -2.92]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Muramvya",
-        "wigos_id": "N/A",
-        "type": "Agrometeorological Station",
+        "wigos_id": "0-108-0-64395",
+        "network": "Meteorological",
+        "type": "Agrometeorological",
         "elevation_m": 1893,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Central Divide"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          29.62,
-          -3.26
-        ]
+        "coordinates": [29.62, -3.26]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Nyabiraba",
-        "wigos_id": "N/A",
-        "type": "Agrometeorological Station",
+        "wigos_id": "0-108-0-64446",
+        "network": "Meteorological",
+        "type": "Agrometeorological",
         "elevation_m": 1700,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Tanganyika Escarpment"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          29.47,
-          -3.48
-        ]
+        "coordinates": [29.47, -3.48]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Rutana",
-        "wigos_id": "N/A",
-        "type": "Agrometeorological Station",
+        "wigos_id": "0-108-0-64396",
+        "network": "Meteorological",
+        "type": "Agrometeorological",
         "elevation_m": 1720,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Southern Plateau"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          29.99,
-          -3.92
-        ]
+        "coordinates": [29.99, -3.92]
       }
     },
     {
       "type": "Feature",
       "properties": {
         "name": "Ruyigi",
-        "wigos_id": "N/A",
-        "type": "Agrometeorological Station",
+        "wigos_id": "0-108-0-64393",
+        "network": "Meteorological",
+        "type": "Agrometeorological",
         "elevation_m": 1750,
-        "status": "Operational"
+        "status": "Operational",
+        "basin": "Malagarazi"
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          30.25,
-          -3.48
-        ]
+        "coordinates": [30.25, -3.48]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Bujumbura Port",
+        "wigos_id": "N/A",
+        "network": "Hydrological",
+        "type": "Lake Gauge / Water Quality",
+        "elevation_m": 773,
+        "status": "Operational",
+        "basin": "Lake Tanganyika"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [29.35, -3.37]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ruzizi Mouth",
+        "wigos_id": "N/A",
+        "network": "Hydrological",
+        "type": "River Gauge Station",
+        "elevation_m": 775,
+        "status": "Operational",
+        "basin": "Ruzizi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [29.23, -3.32]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ruvubu River (Gitega)",
+        "wigos_id": "N/A",
+        "network": "Hydrological",
+        "type": "River Gauge Station",
+        "elevation_m": 1520,
+        "status": "Operational",
+        "basin": "Ruvubu"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [29.95, -3.38]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kibaya Ruvyironza River",
+        "wigos_id": "N/A",
+        "network": "Hydrological",
+        "type": "River Headwater Gauge",
+        "elevation_m": 1650,
+        "status": "Operational",
+        "basin": "Ruvyironza / Nile"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [29.85, -3.83]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Akanyaru Border",
+        "wigos_id": "N/A",
+        "network": "Hydrological",
+        "type": "Transboundary River Gauge",
+        "elevation_m": 1350,
+        "status": "Operational",
+        "basin": "Akanyaru / Kagera"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [29.96, -2.45]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Malagarasi Mutambara",
+        "wigos_id": "N/A",
+        "network": "Hydrological",
+        "type": "River Gauge Station",
+        "elevation_m": 1100,
+        "status": "Operational",
+        "basin": "Malagarazi"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [30.15, -4.1]
       }
     }
   ]
