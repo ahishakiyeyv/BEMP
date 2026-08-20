@@ -1,0 +1,62 @@
+.contSidebar {
+  height: auto;
+  border: 1px solid var(--border-color);
+  margin: 15px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  background-color: var(--secondary-color);
+  padding: 10px;
+}
+.sectionSidebar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.sectionSidebar i {
+  font-size: 12px;
+  color: #4483cd;
+  background-color: #e8f0f9;
+  padding: 8px;
+  border-radius: 20%;
+}
+.sectionSidebar .section-head {
+  font-size: 14px;
+  color: var(--primary-text);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.section-content {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.section-content .section-txt {
+  font-size: 20px;
+  color: var(--text-light);
+  font-weight: 400;
+}
+.section-content .section-value {
+  font-size: 16px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.section-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.section-footer .foot-value {
+  font-weight: 200;
+  font-size: 12px;
+  color: red;
+}
+.section-footer .footer-content {
+  font-weight: 200;
+  font-size: 12px;
+  color: var(--text-light);
+}

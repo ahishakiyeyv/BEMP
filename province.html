@@ -12,6 +12,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
     />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/province.css" />
     <title>Province - Burundi Environmental Monitoring Platform</title>
   </head>
   <body>
@@ -94,14 +95,36 @@
         <div id="map"></div>
       </div>
       <div class="sidebar-right">
-        <h1>sidebar right</h1>
+        <div class="overview">
+          <h1 class="overview-head">Overview</h1>
+          <h2 class="overview-subhead">Province</h2>
+          <p class="overview-content">Bujumbura</p>
+          <div class="overview-status">
+            <h2 class="overview-subhead">Environmental Risk</h2>
+            <p class="overview-content">Active</p>
+          </div>
+        </div>
+        <div class="contSidebar">
+          <div class="sectionSidebar">
+            <i class="fa-solid fa-user-group"></i>
+            <h3 class="section-head">Population</h3>
+          </div>
+          <div class="section-content">
+            <p class="section-txt">20,0000 people</p>
+            <p class="section-value">9 Communes</p>
+          </div>
+          <div class="section-footer">
+            <h3 class="foot-value">86%</h3>
+            <h3 class="footer-content">Rural</h3>
+          </div>
+        </div>
       </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
       var map = L.map("map").setView([-3.3731, 29.9189], 9);
- var osm = L.tileLayer(
+      var osm = L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
           attribution: "&copy; OpenStreetMap contributors",
