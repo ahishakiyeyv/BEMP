@@ -12,6 +12,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
     />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/lakes.css" />
     <title>Lakes - Burundi Environmental Monitoring Platform</title>
   </head>
   <body>
@@ -94,11 +95,57 @@
         <div id="map"></div>
       </div>
       <div class="sidebar-right">
-        <h1>sidebar right</h1>
+        <div class="sidebar-content">
+          <div class="head-section">
+            <i class="fa-solid fa-cloud-rain"></i>
+            <h3 class="head-text">Rainfall</h3>
+          </div>
+          <div class="content">
+            <h2 class="title-paragraph">86.4 mm</h2>
+            <p class="text-para">Last 24 hours</p>
+            <div class="span-box">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              <span class="span-text">+18.5% vs normal</span>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-content">
+          <div class="head-section">
+            <i class="fa-solid fa-water"></i>
+            <h3 class="head-text">Water Level</h3>
+          </div>
+          <div class="content">
+            <h2 class="title-paragraph">772.4 m</h2>
+            <p class="text-para">Lake Tanganyika</p>
+            <div class="span-box">
+              <i class="fa-solid fa-arrow-trend-up"></i>
+              <span class="span-text">+0.32 m</span>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-content">
+          <div class="head-section">
+            <i class="fa-solid fa-cloud-rain"></i>
+            <h3 class="head-text">Rainfall - Last 30 days</h3>
+          </div>
+          <div class="content">
+            <canvas id="rainfallChart"></canvas>
+          </div>
+        </div>
+        <div class="sidebar-content">
+          <div class="head-section">
+            <i class="fa-solid fa-water"></i>
+            <h3 class="head-text">Water Level - Last 30 days</h3>
+          </div>
+          <div class="content">
+            <canvas id="waterLevelChart"></canvas>
+          </div>
+        </div>
       </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       var map = L.map("map").setView([-3.3731, 29.9189], 9);
 
@@ -159,6 +206,7 @@
           }).addTo(map);
         });
     </script>
+    <script src="js/chart.js"></script>
     <script src="js/utils.js"></script>
   </body>
 </html>
