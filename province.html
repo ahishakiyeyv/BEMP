@@ -96,162 +96,62 @@
       </div>
       <div class="sidebar-right">
         <div class="overview">
-          <h1 class="overview-head">Overview</h1>
-          <p class="overview-content">Gitega</p>
-          <div class="overview-status">
-            <h2 class="overview-subhead">Environmental Risk</h2>
-            <p class="overview-content">moderate</p>
-          </div>
+          <h1 class="overview-head">Province details</h1>
+          <p class="overview-content" id="province-name">Select a province</p>
+          <p
+            class="overview-hint"
+            id="province-prompt"
+            role="status"
+            aria-live="polite"
+          >
+            Click on a province to see the details.
+          </p>
         </div>
-        <div class="contSidebar">
+        <div class="contSidebar" aria-label="Province data">
           <div class="sectionSidebar">
-            <i class="fa-solid fa-user-group"></i>
-            <h3 class="section-head">Population</h3>
+            <i class="fa-solid fa-map"></i>
+            <h3 class="section-head">Administrative data</h3>
           </div>
           <div class="section-content">
-            <p class="section-txt">20,0000 people</p>
-            <p class="section-value">9 Communes</p>
-          </div>
-          <div class="section-footer">
-            <h3 class="foot-value">86%</h3>
-            <h3 class="footer-content">Rural</h3>
+            <div class="box-result">
+              <p class="para-section">Type:</p>
+              <p class="para-result" id="province-type">—</p>
+            </div>
+            <div class="box-result">
+              <p class="para-section">Administrative ID:</p>
+              <p class="para-result" id="province-id">—</p>
+            </div>
           </div>
         </div>
-        <div class="contSidebar">
+        <div class="contSidebar" aria-label="Province climate">
           <div class="sectionSidebar">
             <i class="fa-solid fa-cloud-rain"></i>
             <h3 class="section-head">Climate</h3>
           </div>
           <div class="section-content">
             <div class="box-result">
-              <p class="para-section">Rainfall:</p>
-              <p class="para-result">1200 mm</p>
+              <p class="para-section">Expected rainfall today:</p>
+              <p class="para-result" id="weather-rainfall">—</p>
             </div>
             <div class="box-result">
-              <p class="para-section">Temperature:</p>
-              <p class="para-result">22°C</p>
+              <p class="para-section">Current temperature:</p>
+              <p class="para-result" id="weather-temperature">—</p>
             </div>
+            <p
+              class="weather-status"
+              id="weather-status"
+              role="status"
+              aria-live="polite"
+            >
+              Weather appears when a province is selected.
+            </p>
           </div>
         </div>
-        <div class="contSidebar">
-          <div class="sectionSidebar">
-            <i class="fa-solid fa-water"></i>
-            <h3 class="section-head">water</h3>
-          </div>
-          <div class="section-content">
-            <div class="box-result">
-              <p class="para-section">Hydrological Stations:</p>
-              <p class="para-result">4</p>
-            </div>
-            <div class="box-result">
-              <p class="para-section">River Monitored:</p>
-              <p class="para-result">6</p>
-            </div>
-          </div>
-        </div>
-        <div class="contSidebar">
-          <div class="sectionSidebar">
-            <i class="fa-solid fa-water"></i>
-            <h3 class="section-head">hazards</h3>
-          </div>
-          <div class="section-content">
-            <div class="box-result">
-              <p class="para-section">Flood:</p>
-              <p class="para-result">Low</p>
-            </div>
-            <div class="box-result">
-              <p class="para-section">Landslide:</p>
-              <p class="para-result">High</p>
-            </div>
-            <div class="box-result">
-              <p class="para-section">Drought:</p>
-              <p class="para-result">Moderate</p>
-            </div>
-            <div class="box-result">
-              <p class="para-section">Soil Erosion:</p>
-              <p class="para-result">High</p>
-            </div>
-          </div>
-        </div>
-        <button class="detailed">View Detailed Report</button>
       </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-    <script>
-      var map = L.map("map").setView([-3.3731, 29.9189], 9);
-      var osm = L.tileLayer(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        {
-          attribution: "&copy; OpenStreetMap contributors",
-        },
-      );
-
-      const googleSatellite = L.tileLayer(
-        "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-        {
-          maxZoom: 20,
-          attribution: "&copy; Google",
-        },
-      );
-
-      const openTopoMap = L.tileLayer(
-        "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-        {
-          maxZoom: 17,
-          attribution:
-            "Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)",
-        },
-      );
-
-      // Base map
-      osm.addTo(map);
-
-      const baseMaps = {
-        OpenStreetMap: osm,
-        "Google Satellite": googleSatellite,
-        "Topo Map": openTopoMap,
-      };
-
-      L.control.layers(baseMaps).addTo(map);
-
-      // fetch the provinces GeoJSON data and add it to the map
-      fetch("data/country.geojson")
-        .then((response) => response.json())
-        .then((data) => {
-          L.geoJSON(data, {
-            onEachFeature: function (feature, layer) {
-              const popupHTML = `
-                <div class="station-popup">
-                  <div class="station-popup-header">
-                    <h3 class="station-name">${feature.properties.NAME_1} Province</h3>
-                  </div>
-                  <div class="station-popup-body">
-                    <div class="popup-field">
-                      <span class="popup-label"><i class="fas fa-thermometer"></i> Type</span>
-                      <span class="popup-value">${feature.properties.type}</span>
-                    </div>
-                    <div class="popup-field">
-                      <span class="popup-label"><i class="fas fa-mountain"></i> Elevation</span>
-                      <span class="popup-value">${feature.properties.elevation_m} m</span>
-                    </div>
-                  </div>
-                </div>
-              `;
-              layer.bindPopup(popupHTML);
-            },
-            style: function (feature) {
-              return {
-                color: "#3388ff",
-                weight: 2,
-                opacity: 1,
-                fillColor: "#3388ff", // Set the fill color to blue
-                fillOpacity: 0.2,
-              };
-            },
-          }).addTo(map);
-        });
-    </script>
+    <script src="js/province.js"></script>
     <script src="js/utils.js"></script>
   </body>
 </html>

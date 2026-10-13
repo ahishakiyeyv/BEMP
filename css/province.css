@@ -16,31 +16,13 @@
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 10px;
+  overflow-wrap: anywhere;
 }
-.overview-status {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
+.overview-hint,
+.weather-status {
   color: var(--text-light);
-  font-size: 16px;
-  font-weight: 400;
-}
-.overview-status .overview-subhead {
-  color: var(--text-light);
-  font-size: 16px;
-  font-weight: 400;
-}
-.overview-status .overview-content {
-  color: var(--primary-color);
-  font-size: 14px;
-  font-weight: 500;
-  border: 1px solid var(--border-color);
-  padding: 5px 10px;
-  border-radius: 8px;
-  background-color: #f8e4bd;
-  text-transform: capitalize;
-  color: #ffa503;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .contSidebar {
@@ -116,7 +98,8 @@
 }
 .para-result {
   color: var(--primary-color);
-  text-align: left;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 .detailed {
   padding: 0.8rem 1.2rem;
@@ -129,4 +112,8 @@
   display: block;
   margin: 0 auto;
   cursor: pointer;
+}
+
+#map path.leaflet-interactive:focus:not(:focus-visible) {
+  outline: none;
 }
