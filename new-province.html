@@ -96,105 +96,148 @@
       </div>
       <div class="sidebar-right">
         <div class="overview">
-          <h1 class="overview-head">Overview</h1>
-          <p class="overview-content">Gitega</p>
-          <div class="overview-status">
-            <h2 class="overview-subhead">Environmental Risk</h2>
-            <p class="overview-content">moderate</p>
+          <h1 class="overview-head">Province details</h1>
+          <p class="overview-content" id="province-name">Select a province</p>
+          <p
+            class="overview-hint"
+            id="province-prompt"
+            role="status"
+            aria-live="polite"
+          >
+            Click on a province to see the details.
+          </p>
+        </div>
+        <div class="contSidebar" aria-label="Administrative data">
+          <div class="sectionSidebar">
+            <i class="fa-solid fa-map"></i>
+            <h3 class="section-head">Administrative data</h3>
+          </div>
+          <div class="section-content">
+            <div class="box-result">
+              <p class="para-section">Province code:</p>
+              <p class="para-result" id="province-code">—</p>
+            </div>
           </div>
         </div>
-        <div class="contSidebar">
+        <div class="contSidebar" aria-label="Province population">
           <div class="sectionSidebar">
             <i class="fa-solid fa-user-group"></i>
             <h3 class="section-head">Population</h3>
           </div>
           <div class="section-content">
-            <p class="section-txt">20,0000 people</p>
-            <p class="section-value">9 Communes</p>
-          </div>
-          <div class="section-footer">
-            <h3 class="foot-value">86%</h3>
-            <h3 class="footer-content">Rural</h3>
+            <div class="box-result">
+              <p class="para-section">Total:</p>
+              <p class="para-result" id="population-total">—</p>
+            </div>
+            <div class="box-result">
+              <p class="para-section">Male:</p>
+              <p class="para-result" id="population-male">—</p>
+            </div>
+            <div class="box-result">
+              <p class="para-section">Male percentage:</p>
+              <p class="para-result" id="population-male-percent">—</p>
+            </div>
+            <div class="box-result">
+              <p class="para-section">Female:</p>
+              <p class="para-result" id="population-female">—</p>
+            </div>
+            <div class="box-result">
+              <p class="para-section">Female percentage:</p>
+              <p class="para-result" id="population-female-percent">—</p>
+            </div>
+            <p
+              class="weather-status"
+              id="population-status"
+              role="status"
+              aria-live="polite"
+            >
+              Select a province to see population data.
+            </p>
           </div>
         </div>
-        <div class="contSidebar">
+        <div class="contSidebar" aria-label="Province climate">
           <div class="sectionSidebar">
             <i class="fa-solid fa-cloud-rain"></i>
             <h3 class="section-head">Climate</h3>
           </div>
           <div class="section-content">
             <div class="box-result">
-              <p class="para-section">Rainfall:</p>
-              <p class="para-result">1200 mm</p>
+              <p class="para-section">Expected rainfall today:</p>
+              <p class="para-result" id="weather-rainfall">—</p>
             </div>
             <div class="box-result">
-              <p class="para-section">Temperature:</p>
-              <p class="para-result">22°C</p>
+              <p class="para-section">Current temperature:</p>
+              <p class="para-result" id="weather-temperature">—</p>
             </div>
+            <p
+              class="weather-status"
+              id="weather-status"
+              role="status"
+              aria-live="polite"
+            >
+              Weather appears when a province is selected.
+            </p>
           </div>
         </div>
-        <div class="contSidebar">
+        <div class="contSidebar" aria-label="Province water data">
           <div class="sectionSidebar">
             <i class="fa-solid fa-water"></i>
-            <h3 class="section-head">water</h3>
+            <h3 class="section-head">Water</h3>
           </div>
           <div class="section-content">
             <div class="box-result">
-              <p class="para-section">Hydrological Stations:</p>
-              <p class="para-result">4</p>
+              <p class="para-section">Hydrological stations:</p>
+              <p class="para-result" id="water-stations">—</p>
             </div>
             <div class="box-result">
-              <p class="para-section">River Monitored:</p>
-              <p class="para-result">6</p>
+              <p class="para-section">Rivers monitored:</p>
+              <p class="para-result" id="water-rivers">—</p>
             </div>
           </div>
         </div>
-        <div class="contSidebar">
+        <div class="contSidebar" aria-label="Province hazards">
           <div class="sectionSidebar">
-            <i class="fa-solid fa-water"></i>
-            <h3 class="section-head">hazards</h3>
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h3 class="section-head">Hazards</h3>
           </div>
           <div class="section-content">
-            <div class="box-result">
-              <p class="para-section">Flood:</p>
-              <p class="para-result">Low</p>
-            </div>
-            <div class="box-result">
-              <p class="para-section">Landslide:</p>
-              <p class="para-result">High</p>
-            </div>
             <div class="box-result">
               <p class="para-section">Drought:</p>
-              <p class="para-result">Moderate</p>
+              <p class="para-result" id="hazard-drought">—</p>
             </div>
             <div class="box-result">
               <p class="para-section">Soil Erosion:</p>
-              <p class="para-result">High</p>
+              <p class="para-result" id="hazard-erosion">—</p>
+            </div>
+            <div class="box-result">
+              <p class="para-section">Flood:</p>
+              <p class="para-result" id="hazard-flood">—</p>
+            </div>
+            <div class="box-result">
+              <p class="para-section">Landslide:</p>
+              <p class="para-result" id="hazard-landslide">—</p>
             </div>
           </div>
         </div>
-        <button class="detailed">View Detailed Report</button>
       </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
-      var map = L.map("map").setView([-3.3731, 29.9189], 9);
-      var osm = L.tileLayer(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        {
-          attribution: "&copy; OpenStreetMap contributors",
-        },
-      );
+      const map = L.map("map", { preferCanvas: true });
+      const esri = L.tileLayer(
+        "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+        { attribution: "Tiles © Esri — Esri, DeLorme, NAVTEQ" },
+      ).addTo(map);
 
+      const osm = L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        { attribution: "&copy; OpenStreetMap contributors" },
+      );
       const googleSatellite = L.tileLayer(
         "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
-        {
-          maxZoom: 20,
-          attribution: "&copy; Google",
-        },
+        { maxZoom: 20, attribution: "&copy; Google" },
       );
-
       const openTopoMap = L.tileLayer(
         "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
         {
@@ -203,44 +246,216 @@
             "Map data: &copy; OpenStreetMap contributors, SRTM | Map style: &copy; OpenTopoMap (CC-BY-SA)",
         },
       );
+      L.control
+        .layers({
+          "Esri Light Gray": esri,
+          OpenStreetMap: osm,
+          "Google Satellite": googleSatellite,
+          "Topo Map": openTopoMap,
+        })
+        .addTo(map);
 
-      // Base map
-      osm.addTo(map);
-
-      const baseMaps = {
-        OpenStreetMap: osm,
-        "Google Satellite": googleSatellite,
-        "Topo Map": openTopoMap,
+      const defaultProvinceStyle = {
+        color: "#3388ff",
+        weight: 2,
+        fillColor: "#3388ff",
+        fillOpacity: 0.2,
       };
+      const selectedProvinceStyle = {
+        ...defaultProvinceStyle,
+        color: "#f08c28",
+        weight: 3,
+        fillColor: "#f08c28",
+        fillOpacity: 0.4,
+      };
+      const provinceName = document.getElementById("province-name");
+      const provincePrompt = document.getElementById("province-prompt");
+      const provinceCode = document.getElementById("province-code");
+      const populationTotal = document.getElementById("population-total");
+      const populationMale = document.getElementById("population-male");
+      const populationMalePercent = document.getElementById(
+        "population-male-percent",
+      );
+      const populationFemale = document.getElementById("population-female");
+      const populationFemalePercent = document.getElementById(
+        "population-female-percent",
+      );
+      const populationStatus = document.getElementById("population-status");
+      const weatherRainfall = document.getElementById("weather-rainfall");
+      const weatherTemperature = document.getElementById("weather-temperature");
+      const weatherStatus = document.getElementById("weather-status");
+      const unavailableMetricIds = [
+        "water-stations",
+        "water-rivers",
+        "hazard-drought",
+        "hazard-erosion",
+        "hazard-flood",
+        "hazard-landslide",
+      ];
+      let selectedProvince;
+      let weatherController;
 
-      L.control.layers(baseMaps).addTo(map);
+      function readNumber(properties, keys) {
+        for (const key of keys) {
+          const value = properties[key];
+          if (
+            value !== null &&
+            value !== "" &&
+            Number.isFinite(Number(value))
+          ) {
+            return Number(value);
+          }
+        }
+        return null;
+      }
 
-      // fetch the GeoJSON data and add it to the map
+      function formatNumber(value) {
+        return value === null
+          ? "Not available"
+          : new Intl.NumberFormat().format(value);
+      }
+
+      function formatPercent(value) {
+        return value === null
+          ? "Not available"
+          : `${new Intl.NumberFormat(undefined, { maximumFractionDigits: 1 }).format(value)}%`;
+      }
+
+      function updatePopulation(properties) {
+        const total = readNumber(properties, [
+          "POP2024",
+          "POPULATION",
+          "POP_TOTAL",
+        ]);
+        const male = readNumber(properties, [
+          "POP_MALE",
+          "MALE",
+          "MALE_POPULATION",
+        ]);
+        const female = readNumber(properties, [
+          "POP_FEMALE",
+          "FEMALE",
+          "FEMALE_POPULATION",
+        ]);
+        const malePercent =
+          readNumber(properties, ["MALE_PERCENTAGE", "MALE_PERCENT"]) ??
+          (total && male !== null ? (male / total) * 100 : null);
+        const femalePercent =
+          readNumber(properties, ["FEMALE_PERCENTAGE", "FEMALE_PERCENT"]) ??
+          (total && female !== null ? (female / total) * 100 : null);
+
+        populationTotal.textContent = formatNumber(total);
+        populationMale.textContent = formatNumber(male);
+        populationMalePercent.textContent = formatPercent(malePercent);
+        populationFemale.textContent = formatNumber(female);
+        populationFemalePercent.textContent = formatPercent(femalePercent);
+        populationStatus.textContent = properties.CENSUS_YEAR
+          ? `Population data year: ${properties.CENSUS_YEAR}.`
+          : "Province-level population data is not available.";
+      }
+
+      async function loadProvinceWeather(location) {
+        weatherController?.abort();
+        const controller = new AbortController();
+        weatherController = controller;
+        weatherRainfall.textContent = "Loading...";
+        weatherTemperature.textContent = "Loading...";
+        weatherStatus.textContent = "Fetching forecast from Open-Meteo...";
+
+        const parameters = new URLSearchParams({
+          latitude: location.lat.toFixed(4),
+          longitude: location.lng.toFixed(4),
+          current: "temperature_2m",
+          daily: "precipitation_sum",
+          timezone: "auto",
+          forecast_days: "1",
+        });
+
+        try {
+          const response = await fetch(
+            `https://api.open-meteo.com/v1/forecast?${parameters}`,
+            { signal: controller.signal },
+          );
+          if (!response.ok) {
+            throw new Error(`Open-Meteo returned ${response.status}`);
+          }
+
+          const weather = await response.json();
+          const temperature = weather.current?.temperature_2m;
+          const rainfall = weather.daily?.precipitation_sum?.[0];
+          weatherTemperature.textContent =
+            typeof temperature === "number"
+              ? `${temperature} °C`
+              : "Unavailable";
+          weatherRainfall.textContent =
+            typeof rainfall === "number" ? `${rainfall} mm` : "Unavailable";
+          weatherStatus.textContent = `Updated ${weather.current?.time || "just now"} · Open-Meteo`;
+        } catch (error) {
+          if (error.name === "AbortError") {
+            return;
+          }
+          console.error("Error fetching province weather:", error);
+          weatherRainfall.textContent = "Unavailable";
+          weatherTemperature.textContent = "Unavailable";
+          weatherStatus.textContent = "Weather data could not be loaded.";
+        }
+      }
+
+      function selectProvince(feature, layer) {
+        if (selectedProvince) {
+          provinceLayer.resetStyle(selectedProvince);
+        }
+        selectedProvince = layer;
+        layer.setStyle(selectedProvinceStyle);
+
+        const properties = feature.properties || {};
+        provinceName.textContent = properties.PROVINCES || "Unknown province";
+        provincePrompt.textContent = "Province boundary selected.";
+        provinceCode.textContent = properties.CODPROVINC ?? "Not available";
+        updatePopulation(properties);
+        unavailableMetricIds.forEach((id) => {
+          document.getElementById(id).textContent = "Not available";
+        });
+        loadProvinceWeather(layer.getBounds().getCenter());
+      }
+
+      let provinceLayer;
       fetch("data/new_Admin.geojson")
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Province data returned ${response.status}`);
+          }
+          return response.json();
+        })
         .then((data) => {
-          L.geoJSON(data, {
-            onEachFeature: function (feature, layer) {
-              const popupHTML = `
-                <div class="station-popup">
-                  <div class="station-popup-header">
-                    <h3 class="station-name">${feature.properties.PROVINCES} Province</h3>
-                  </div>
-                  <div class="station-popup-body">
-                    <div class="popup-field">
-                      <span class="popup-label"><i class="fas fa-thermometer"></i> Type</span>
-                      <span class="popup-value">${feature.properties.type}</span>
-                    </div>
-                    <div class="popup-field">
-                      <span class="popup-label"><i class="fas fa-mountain"></i> Elevation</span>
-                      <span class="popup-value">${feature.properties.elevation_m} m</span>
-                    </div>
-                  </div>
-                </div>
-              `;
-              layer.bindPopup(popupHTML);
+          provinceLayer = L.geoJSON(data, {
+            style: defaultProvinceStyle,
+            smoothFactor: 2,
+            onEachFeature(feature, layer) {
+              layer.bindTooltip(feature.properties.PROVINCES || "Province", {
+                sticky: true,
+              });
+              layer.on({
+                click: () => selectProvince(feature, layer),
+                mouseover: () => {
+                  if (layer !== selectedProvince) {
+                    layer.setStyle({ weight: 3, fillOpacity: 0.35 });
+                  }
+                },
+                mouseout: () => {
+                  if (layer !== selectedProvince) {
+                    provinceLayer.resetStyle(layer);
+                  }
+                },
+              });
             },
           }).addTo(map);
+          map.fitBounds(provinceLayer.getBounds(), { padding: [16, 16] });
+        })
+        .catch((error) => {
+          console.error("Error loading province boundaries:", error);
+          provincePrompt.textContent =
+            "Province boundaries could not be loaded.";
         });
     </script>
     <script src="js/utils.js"></script>

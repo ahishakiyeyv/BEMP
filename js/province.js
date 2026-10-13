@@ -1,10 +1,16 @@
 const provinceMap = L.map("map");
+
+const esri = L.tileLayer(
+  "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+  { attribution: "Tiles © Esri — Esri, DeLorme, NAVTEQ" },
+).addTo(provinceMap);
+
 const osmLayer = L.tileLayer(
   "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
   {
     attribution: "&copy; OpenStreetMap contributors",
   },
-).addTo(provinceMap);
+);
 const satelliteLayer = L.tileLayer(
   "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
   {
@@ -23,6 +29,7 @@ const topoLayer = L.tileLayer(
 
 L.control
   .layers({
+    "Esri Light Gray": esri,
     OpenStreetMap: osmLayer,
     "Google Satellite": satelliteLayer,
     "Topo Map": topoLayer,

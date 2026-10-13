@@ -208,7 +208,12 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
-      var map = L.map("map").setView([-3.3731, 29.9189], 9);
+      var map = L.map("map", { preferCanvas: true }).setView([-3.3731, 29.9189], 9);
+
+      const esri = L.tileLayer(
+        "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+        { attribution: "Tiles © Esri — Esri, DeLorme, NAVTEQ" },
+      ).addTo(map);
 
       var osm = L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -235,9 +240,10 @@
       );
 
       // Base map
-      osm.addTo(map);
+      esri.addTo(map);
 
       const baseMaps = {
+        "Esri Light Gray": esri,
         OpenStreetMap: osm,
         "Google Satellite": googleSatellite,
         "Topo Map": openTopoMap,

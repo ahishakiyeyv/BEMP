@@ -1,83 +1,17 @@
 // Initialize the map and set its view over Burundi
-var map = L.map("map").setView([-3.3731, 29.9189], 9);
+var map = L.map("map", { preferCanvas: true }).setView([-3.3731, 29.9189], 9);
 
 // Base Map
 var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
-// 1. Define the Layer Groups FIRST and add them to the map by default
-var countryLayer = L.layerGroup().addTo(map);
-var roadsLayer = L.layerGroup().addTo(map);
-var lakesLayer = L.layerGroup().addTo(map);
-var parksLayer = L.layerGroup().addTo(map);
-var newAdminLayer = L.layerGroup().addTo(map);
-
-// 2. Fetch GeoJSON data and add them INTO the layer groups (not directly to map)
-fetch("data/country.geojson")
-  .then((response) => response.json())
-  .then((data) => {
-    var geojson = L.geoJSON(data, {
-      style: { color: "#7d8b8f", weight: 3, fillOpacity: 0.4 },
-    }).bindPopup((layer) => layer.feature.properties.NAME_1);
-
-    countryLayer.addLayer(geojson); // Adds to the group
-  })
-  .catch((error) => console.error("Error loading Country data:", error));
-
-fetch("data/RNs.geojson")
-  .then((response) => response.json())
-  .then((data) => {
-    var geojson = L.geoJSON(data, {
-      style: { color: "#ff5733", weight: 2, dashArray: "5, 5" },
-    });
-    roadsLayer.addLayer(geojson);
-  })
-  .catch((error) => console.error("Error loading Roads data:", error));
-
-fetch("data/Lakes.geojson")
-  .then((response) => response.json())
-  .then((data) => {
-    var geojson = L.geoJSON(data, {
-      style: {
-        color: "#3498db",
-        weight: 1,
-        fillColor: "#3498db",
-        fillOpacity: 0.5,
-      },
-    });
-    lakesLayer.addLayer(geojson);
-  })
-  .catch((error) => console.error("Error loading Lakes data:", error));
-
-fetch("data/National_Parks.geojson")
-  .then((response) => response.json())
-  .then((data) => {
-    var geojson = L.geoJSON(data, {
-      style: {
-        color: "#2ecc71",
-        weight: 1,
-        fillColor: "#2ecc71",
-        fillOpacity: 0.5,
-      },
-    });
-    parksLayer.addLayer(geojson);
-  })
-  .catch((error) => console.error("Error loading National Parks data:", error));
-
-//fetching new administrative boundaries data
-fetch("data/new_Admin.geojson")
-  .then((response) => response.json())
-  .then((data) => {
-    var geojson = L.geoJSON(data, {
-      style: { color: "#333", weight: 3, fillOpacity: 0.4 },
-    }).bindPopup((layer) => layer.feature.properties.PROVINCES);
-
-    newAdminLayer.addLayer(geojson); // Adds to the group
-  })
-  .catch((error) =>
-    console.error("Error loading Administrative Boundaries data:", error),
-  );
+// Load large overlays only when selected in the layer control.
+var countryLayer = L.layerGroup();
+var roadsLayer = L.layerGroup();
+var lakesLayer = L.layerGroup();
+var parksLayer = L.layerGroup();
+var newAdminLayer = L.layerGroup();
 
 // Scale control
 L.control
@@ -99,6 +33,79 @@ var overlayMaps = {
 };
 
 L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
+
+var overlaySources = new Map([
+  [countryLayer, {
+    path: "data/country.geojson",
+    options: { style: { color: "#7d8b8f", weight: 3, fillOpacity: 0.4 } },
+    popupProperty: "NAME_1",
+  }],
+  [roadsLayer, {
+    path: "data/RNs.geojson",
+    options: { style: { color: "#ff5733", weight: 2, dashArray: "5, 5" } },
+  }],
+  [lakesLayer, {
+    path: "data/Lakes.geojson",
+    options: {
+      style: {
+        color: "#3498db",
+        weight: 1,
+        fillColor: "#3498db",
+        fillOpacity: 0.5,
+      },
+    },
+  }],
+  [parksLayer, {
+    path: "data/National_Parks.geojson",
+    options: {
+      style: {
+        color: "#2ecc71",
+        weight: 1,
+        fillColor: "#2ecc71",
+        fillOpacity: 0.5,
+      },
+    },
+  }],
+  [newAdminLayer, {
+    path: "data/new_Admin.geojson",
+    options: { style: { color: "#333", weight: 3, fillOpacity: 0.4 } },
+    popupProperty: "PROVINCES",
+  }],
+]);
+var loadingOverlays = new Set();
+
+map.on("overlayadd", ({ layer }) => {
+  const source = overlaySources.get(layer);
+  if (
+    !source ||
+    layer.getLayers().length > 0 ||
+    loadingOverlays.has(layer)
+  ) {
+    return;
+  }
+
+  loadingOverlays.add(layer);
+  fetch(source.path)
+    .then((response) => {
+      if (!response.ok) throw new Error(`Request returned ${response.status}`);
+      return response.json();
+    })
+    .then((data) => {
+      var geojson = L.geoJSON(data, {
+        ...source.options,
+        smoothFactor: 2,
+      });
+      if (source.popupProperty) {
+        geojson.bindPopup(
+          (featureLayer) =>
+            featureLayer.feature.properties[source.popupProperty],
+        );
+      }
+      layer.addLayer(geojson);
+    })
+    .catch((error) => console.error(`Error loading ${source.path}:`, error))
+    .finally(() => loadingOverlays.delete(layer));
+});
 
 // Add a legend to explain the symbols/colors
 var legend = L.control({ position: "bottomright" });

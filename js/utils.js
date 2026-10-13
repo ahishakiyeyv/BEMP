@@ -107,5 +107,7 @@ function displayUserLocation() {
   }
 }
 
-// Call the function to display user location
-displayUserLocation();
+// Request location only when the user asks for it.
+document
+  .querySelector(".location-btn")
+  ?.addEventListener("click", displayUserLocation);
