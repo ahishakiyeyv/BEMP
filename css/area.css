@@ -38,15 +38,31 @@
 }
 .area-info {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 1fr);
-  gap: 10px;
-}
-.text-para span {
-  font-weight: bold;
-  color: var(--primary-text);
+  grid-template-columns: 1fr;
+  gap: 0;
 }
 .text-para {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 2px;
+  border-bottom: 1px solid var(--border-color);
+  margin: 0;
+}
+.text-para:last-child {
+  border-bottom: 0;
+}
+.area-label {
+  flex: 0 0 44%;
+  color: var(--text-light);
+  font-size: 12px;
+  font-weight: 600;
+}
+.area-value {
   color: var(--primary-text);
-  font-size: 16px;
-  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: right;
+  overflow-wrap: anywhere;
 }

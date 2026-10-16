@@ -116,7 +116,7 @@ async function loadProvinceWeather(location) {
       typeof temperature === "number" ? `${temperature} °C` : "Unavailable";
     weatherRainfall.textContent =
       typeof rainfall === "number" ? `${rainfall} mm` : "Unavailable";
-    weatherStatus.textContent = `Updated ${weather.current?.time || "just now"} · Open-Meteo`;
+    weatherStatus.textContent = `Updated ${weather.current?.time || "just now"}`;
   } catch (error) {
     if (error.name === "AbortError") {
       return;

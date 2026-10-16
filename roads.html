@@ -12,6 +12,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
     />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/roads.css" />
     <title>Roads - Burundi Environmental Monitoring Platform</title>
   </head>
   <body>
@@ -91,7 +92,100 @@
         <div id="map"></div>
       </div>
       <div class="sidebar-right">
-        <h1>sidebar right</h1>
+        <aside class="roads-panel" aria-label="Road network">
+          <header class="roads-header">
+            <p class="roads-eyebrow">BURUNDI NETWORK</p>
+            <h1>Roads</h1>
+            <p>Explore road segments and their mapped attributes.</p>
+          </header>
+
+          <section class="roads-summary" aria-label="Road data summary">
+            <div class="roads-stat">
+              <strong id="road-count">—</strong>
+              <span>segments</span>
+            </div>
+            <div class="roads-stat">
+              <strong id="named-road-count">—</strong>
+              <span>with a recorded name</span>
+            </div>
+          </section>
+
+          <section class="roads-search" aria-label="Find a road">
+            <label for="road-search">Find by road name or reference</label>
+            <div class="roads-search-input">
+              <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+              <input
+                id="road-search"
+                type="search"
+                placeholder="Try RN 5 or a road name"
+                autocomplete="off"
+                aria-controls="road-results"
+              />
+            </div>
+            <ul id="road-results" class="road-results" aria-live="polite">
+              <li class="road-results-hint">
+                Search for a road or select a line on the map.
+              </li>
+            </ul>
+          </section>
+
+          <section
+            class="road-detail"
+            id="road-detail"
+            aria-live="polite"
+            hidden
+          >
+            <div class="road-detail-heading">
+              <p class="roads-eyebrow">SELECTED SEGMENT</p>
+              <h2 id="road-name">Road details</h2>
+              <p id="road-subtitle"></p>
+            </div>
+            <dl class="road-fields">
+              <div>
+                <dt>Road class</dt>
+                <dd id="road-class">—</dd>
+              </div>
+              <div>
+                <dt>Reference</dt>
+                <dd id="road-ref">—</dd>
+              </div>
+              <div>
+                <dt>Speed limit</dt>
+                <dd id="road-speed">—</dd>
+              </div>
+              <div>
+                <dt>One way</dt>
+                <dd id="road-oneway">—</dd>
+              </div>
+              <div>
+                <dt>Bridge</dt>
+                <dd id="road-bridge">—</dd>
+              </div>
+              <div>
+                <dt>Tunnel</dt>
+                <dd id="road-tunnel">—</dd>
+              </div>
+              <div>
+                <dt>Segment ID</dt>
+                <dd id="road-id">—</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="roads-legend" aria-label="Road class legend">
+            <h2>Road class</h2>
+            <ul>
+              <li><span class="legend-swatch major"></span>Primary / trunk</li>
+              <li>
+                <span class="legend-swatch regional"></span>Secondary / tertiary
+              </li>
+              <li>
+                <span class="legend-swatch local"></span>Residential / service
+              </li>
+              <li><span class="legend-swatch path"></span>Paths / tracks</li>
+            </ul>
+          </section>
+        </aside>
       </div>
     </section>
 
@@ -142,6 +236,179 @@
 
       L.control.layers(baseMaps).addTo(map);
 
+      const roadFeatures = [];
+      let selectedRoad = null;
+      const roadFields = {
+        fclass: "road-class",
+        ref: "road-ref",
+        maxspeed: "road-speed",
+        oneway: "road-oneway",
+        bridge: "road-bridge",
+        tunnel: "road-tunnel",
+        osm_id: "road-id",
+      };
+
+      function roadClassColor(roadClass) {
+        if (
+          ["primary", "primary_link", "trunk", "trunk_link"].includes(roadClass)
+        )
+          return "#c4513c";
+        if (
+          ["secondary", "secondary_link", "tertiary", "tertiary_link"].includes(
+            roadClass,
+          )
+        )
+          return "#397da0";
+        if (
+          ["residential", "service", "living_street", "unclassified"].includes(
+            roadClass,
+          )
+        )
+          return "#39766f";
+        return "#a66c2f";
+      }
+
+      function roadStyle(feature) {
+        return {
+          color: feature.properties?.__selected
+            ? "#d34b35"
+            : roadClassColor(feature.properties?.fclass),
+          weight: feature.properties?.__selected ? 5 : 1,
+          opacity: feature.properties?.__selected ? 1 : 0.75,
+        };
+      }
+
+      function displayValue(value, field) {
+        if (
+          value == null ||
+          value === "" ||
+          (field === "maxspeed" && Number(value) === 0)
+        ) {
+          return "Not recorded";
+        }
+        if (field === "fclass") {
+          return value
+            .replaceAll("_", " ")
+            .replace(/\b\w/g, (letter) => letter.toUpperCase());
+        }
+        if (field === "maxspeed" && /^\d+(\.\d+)?$/.test(String(value))) {
+          return `${value} km/h`;
+        }
+        if (field === "oneway") {
+          if (value === "B") return "Both directions";
+          if (value === "F") return "One way";
+        }
+        if (["bridge", "tunnel"].includes(field)) {
+          if (value === "T") return "Yes";
+          if (value === "F") return "No";
+        }
+        if (["lit", "foot", "bicycle"].includes(field)) {
+          if (value === "yes") return "Yes";
+          if (value === "no") return "No";
+        }
+        return String(value);
+      }
+
+      function selectRoad(road, zoomToRoad = false) {
+        if (selectedRoad) {
+          selectedRoad.feature.properties.__selected = false;
+          selectedRoad.layer.setStyle(roadStyle(selectedRoad.feature));
+        }
+        selectedRoad = road;
+        road.feature.properties.__selected = true;
+        road.layer.setStyle(roadStyle(road.feature));
+
+        const properties = road.feature.properties || {};
+        const roadName =
+          properties.name || properties.ref || "Unnamed road segment";
+        const roadClass = displayValue(properties.fclass, "fclass");
+        document.getElementById("road-name").textContent = roadName;
+        document.getElementById("road-subtitle").textContent = [
+          properties.ref,
+          roadClass,
+        ]
+          .filter(Boolean)
+          .join(" · ");
+        Object.entries(roadFields).forEach(([field, elementId]) => {
+          document.getElementById(elementId).textContent = displayValue(
+            properties[field],
+            field,
+          );
+        });
+        document.getElementById("road-detail").hidden = false;
+
+        if (zoomToRoad) {
+          map.fitBounds(road.layer.getBounds(), {
+            padding: [24, 24],
+            maxZoom: 14,
+          });
+        }
+      }
+
+      function renderRoadResults(query) {
+        const results = document.getElementById("road-results");
+        results.replaceChildren();
+        const normalizedQuery = query.trim().toLowerCase();
+        if (normalizedQuery.length < 2) {
+          const hint = document.createElement("li");
+          hint.className = "road-results-hint";
+          hint.textContent =
+            "Enter at least 2 characters, or select a road on the map.";
+          results.append(hint);
+          return;
+        }
+
+        const matches = roadFeatures
+          .filter(({ feature }) => {
+            const properties = feature.properties || {};
+            return [properties.name, properties.ref, properties.old_name].some(
+              (value) =>
+                String(value || "")
+                  .toLowerCase()
+                  .includes(normalizedQuery),
+            );
+          })
+          .slice(0, 8);
+
+        if (!matches.length) {
+          const empty = document.createElement("li");
+          empty.className = "road-results-hint";
+          empty.textContent = "No matching road found in this dataset.";
+          results.append(empty);
+          return;
+        }
+
+        matches.forEach((road) => {
+          const properties = road.feature.properties || {};
+          const item = document.createElement("li");
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "road-result";
+          const title = document.createElement("span");
+          title.className = "road-result-name";
+          title.textContent =
+            properties.name || properties.ref || "Unnamed road segment";
+          const description = document.createElement("span");
+          description.className = "road-result-meta";
+          description.textContent = [
+            properties.ref,
+            displayValue(properties.fclass, "fclass"),
+          ]
+            .filter(Boolean)
+            .join(" · ");
+          button.append(title, description);
+          button.addEventListener("click", () => selectRoad(road, true));
+          item.append(button);
+          results.append(item);
+        });
+      }
+
+      document
+        .getElementById("road-search")
+        .addEventListener("input", (event) => {
+          renderRoadResults(event.target.value);
+        });
+
       //fetch a map of burundi borders
       fetch("data/burundi.geojson")
         .then((response) => response.json())
@@ -153,16 +420,26 @@
       fetch("data/RNs.geojson")
         .then((response) => response.json())
         .then((data) => {
+          document.getElementById("road-count").textContent =
+            data.features.length.toLocaleString();
+          document.getElementById("named-road-count").textContent =
+            data.features
+              .filter((feature) => feature.properties?.name)
+              .length.toLocaleString();
+
           L.geoJSON(data, {
             smoothFactor: 2,
-            style: function (feature) {
-              return {
-                color: "red",
-                dashArray: "5, 5",
-                weight: 2,
-              };
+            style: roadStyle,
+            onEachFeature: function (feature, layer) {
+              const road = { feature, layer };
+              roadFeatures.push(road);
+              layer.on("click", () => selectRoad(road));
             },
           }).addTo(map);
+        })
+        .catch(() => {
+          document.getElementById("road-count").textContent = "Unavailable";
+          document.getElementById("named-road-count").textContent = "—";
         });
     </script>
     <script src="js/utils.js"></script>

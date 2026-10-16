@@ -95,27 +95,51 @@
         <div id="map"></div>
       </div>
       <div class="sidebar-right">
-        <div class="overview-container">
-          <h2 class="area-heading">Kibira National Park</h2>
-          <div class="indice">
-            <i class="fa-solid fa-location-dot"></i>
-            <p class="indice-location">Kayanza - Muramvya - Cibitoke</p>
-          </div>
-          <div class="area-about">
-            <p class="area-text">
-              Kibira National Park is a protected area in Burundi, known for its
-              rich biodiversity and dense rainforest. It is home to various
-              species of flora and fauna, including primates, birds, and rare
-              plants. The park plays a crucial role in conservation efforts and
-              provides opportunities for eco-tourism and research.
-            </p>
-          </div>
-          <div class="area-info">
-            <p class="text-para"><span>Type</span> : National Park</p>
-            <p class="text-para"><span>Area</span> : 400 km²</p>
-            <p class="text-para"><span>Established</span> : 1980</p>
-            <p class="text-para"><span>Biodiversity</span> : High</p>
-            <p class="text-para"><span>Management authority</span> : OBPE</p>
+        <div class="overview-container" aria-live="polite">
+          <p class="area-empty">Click on an area to display its details.</p>
+          <div class="area-details" hidden>
+            <h2 class="area-heading" id="area-heading"></h2>
+            <div class="indice">
+              <i class="fa-solid fa-location-dot"></i>
+              <p class="indice-location" id="area-location"></p>
+            </div>
+            <div class="area-about">
+              <p class="area-text" id="area-description"></p>
+            </div>
+            <div class="area-info">
+              <p class="text-para">
+                <span class="area-label">Local name</span>
+                <span class="area-value" id="area-local-name"></span>
+              </p>
+              <p class="text-para">
+                <span class="area-label">Type</span>
+                <span class="area-value" id="area-type"></span>
+              </p>
+              <p class="text-para">
+                <span class="area-label">Area</span>
+                <span class="area-value" id="area-size"></span>
+              </p>
+              <p class="text-para">
+                <span class="area-label">Status</span>
+                <span class="area-value" id="area-status"></span>
+              </p>
+              <p class="text-para">
+                <span class="area-label">Established</span>
+                <span class="area-value" id="area-year"></span>
+              </p>
+              <p class="text-para">
+                <span class="area-label">IUCN category</span>
+                <span class="area-value" id="area-category"></span>
+              </p>
+              <p class="text-para">
+                <span class="area-label">Management authority</span>
+                <span class="area-value" id="area-authority"></span>
+              </p>
+              <p class="text-para">
+                <span class="area-label">Governance</span>
+                <span class="area-value" id="area-governance"></span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -183,25 +207,59 @@
           L.geoJSON(data, {
             smoothFactor: 2,
             onEachFeature: function (feature, layer) {
+              const properties = feature.properties;
+              const areaName =
+                properties.NAME_ENG || properties.NAME || "Protected area";
               const popupHTML = `
                 <div class="station-popup">
                   <div class="station-popup-header">
-                    <h3 class="station-name">${feature.properties.DESIG_ENG}</h3>
+                    <h3 class="station-name">${areaName}</h3>
                   </div>
                   <div class="station-popup-body">
                     <div class="popup-field">
                       <span class="popup-label"><i class="fas fa-mountain"></i> Name</span>
-                      <span class="popup-value">${feature.properties.NAME}</span>
+                      <span class="popup-value">${properties.NAME || "Not provided"}</span>
                     </div>
                     <div class="popup-field">
                       <span class="popup-label"><i class="fas fa-thermometer"></i>Size Area:</span>
-                      <span class="popup-value">${feature.properties.REP_AREA} km²</span>
+                      <span class="popup-value">${properties.REP_AREA ?? "Not provided"} km²</span>
                     </div>
                     
                   </div>
                 </div>
               `;
               layer.bindPopup(popupHTML);
+              layer.on("click", function () {
+                const designation =
+                  properties.DESIG_ENG || properties.DESIG || "Protected area";
+                const areaSize =
+                  properties.REP_AREA == null
+                    ? "Not provided"
+                    : `${properties.REP_AREA} km²`;
+                const statusYear = properties.STATUS_YR || "Not provided";
+
+                document.querySelector(".area-empty").hidden = true;
+                document.querySelector(".area-details").hidden = false;
+                document.getElementById("area-heading").textContent = areaName;
+                document.getElementById("area-location").textContent =
+                  "Burundi";
+                document.getElementById("area-description").textContent =
+                  `${areaName} is a ${designation.toLowerCase()} in Burundi, covering ${areaSize}. ` +
+                  `It is ${properties.STATUS || "a protected area"} and was established in ${statusYear}.`;
+                document.getElementById("area-local-name").textContent =
+                  properties.NAME || "Not provided";
+                document.getElementById("area-type").textContent = designation;
+                document.getElementById("area-size").textContent = areaSize;
+                document.getElementById("area-status").textContent =
+                  properties.STATUS || "Not provided";
+                document.getElementById("area-year").textContent = statusYear;
+                document.getElementById("area-category").textContent =
+                  properties.IUCN_CAT || "Not provided";
+                document.getElementById("area-authority").textContent =
+                  properties.MANG_AUTH || "Not provided";
+                document.getElementById("area-governance").textContent =
+                  properties.GOV_TYPE || "Not provided";
+              });
             },
             style: function (feature) {
               return {
