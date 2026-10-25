@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Monitor Burundi's environment with interactive maps and dashboard data for weather, rainfall, protected areas, lakes, roads, and administrative regions."
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -94,121 +98,210 @@
         <div id="map"></div>
       </div>
       <div class="sidebar-right">
-        <div class="parent">
-          <div class="div1">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <h3 class="number">2</h3>
-            <h3 class="title-box">Active Flood Alert</h3>
-            <p class="txt-box">High Risk Areas</p>
-          </div>
-          <div class="div2">
-            <i class="fa-solid fa-tower-broadcast"></i>
-            <h3 class="number">63</h3>
-            <h3 class="title-box">Hydrological Stations</h3>
-            <p class="txt-box">24 Automatic stations</p>
-          </div>
-          <div class="div3">
-            <i class="fa-solid fa-tree"></i>
-            <h3 class="number">-1.8%</h3>
-            <h3 class="title-box">Land Cover</h3>
-            <p class="txt-box">Critical in Kibira</p>
-          </div>
-          <div class="div4">
-            <i class="fa-solid fa-water"></i>
-            <h3 class="number">772.4m</h3>
-            <h3 class="title-box">Water Level</h3>
-            <p class="txt-box">Lake Tanganyika</p>
-          </div>
-        </div>
-        <div class="container0">
-          <div class="box-container">
-            <i class="fa-solid fa-cloud-rain"></i>
-            <h2>rainfall</h2>
-          </div>
-          <div class="content">
-            <p class="box-txt">86.4 mm</p>
-          </div>
-          <div class="content-footer">
-            <p class="txt1">Last 24 hours</p>
-            <p class="txt2">18.5% vs Normal</p>
-          </div>
-        </div>
-        <div class="container1">
-          <div class="box-container">
-            <i class="fa-solid fa-leaf"></i>
-            <h2>vegetation Health</h2>
-          </div>
-          <div class="content">
-            <p class="box-txt">NDVI 0.61</p>
-          </div>
-          <div class="content-footer">
-            <p class="txt1">Current Condition</p>
-            <p class="txt2">Moderate</p>
-          </div>
-        </div>
-        <div class="container2">
-          <div class="box-container">
-            <i class="fa-solid fa-water"></i>
-            <h2>Water level</h2>
-          </div>
-          <div class="content">
-            <p class="box-txt">772.4m</p>
-          </div>
-          <div class="content-footer">
-            <p class="txt1">Lake Tanganyika</p>
-            <p class="txt2">+0.32m</p>
-          </div>
-        </div>
-        <div class="container3">
-          <div class="box-container">
-            <i class="fa-solid fa-user-group"></i>
-            <h2>population at risk</h2>
-          </div>
-          <div class="content">
-            <p class="box-txt">1.24M</p>
-            <p class="subtxt">People potentially exposed</p>
-          </div>
-          <div class="bottom-content">
-            <!-- Flood -->
-            <div class="stat-row">
-              <div class="stat-header">
-                <span class="label">Flood</span>
-                <span class="value">482K</span>
-              </div>
-              <div class="progress-track">
-                <div class="progress-fill flood"></div>
-              </div>
-            </div>
+        <header class="dashboard-sidebar-header">
+          <p>BURUNDI ENVIRONMENTAL MONITORING</p>
+          <h1>Situation brief</h1>
+          <span>Forecasts, alerts, and monitoring indicators</span>
+        </header>
 
-            <!-- Landslide -->
-            <div class="stat-row">
-              <div class="stat-header">
-                <span class="label">Landslide</span>
-                <span class="value">316K</span>
+        <section class="sidebar-section" aria-labelledby="priority-title">
+          <h2 class="sidebar-section-title" id="priority-title">
+            <i class="fa-solid fa-bell" aria-hidden="true"></i>
+            Priority updates
+          </h2>
+          <article class="sidebar-card flood-card">
+            <div class="sidebar-card-heading">
+              <span class="sidebar-icon flood-icon" aria-hidden="true">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </span>
+              <div>
+                <h3>Flood alerts</h3>
+                <p>Burundi - current status</p>
               </div>
-              <div class="progress-track">
-                <div class="progress-fill landslide"></div>
+              <strong class="alert-count" id="flood-alert-count">N/A</strong>
+            </div>
+            <p class="card-explanation" id="flood-alert-status">
+              No structured live alert feed is available.
+              <a
+                href="https://www.igebu.bi/produits/prevision-hebdomadaire/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >View IGEBU bulletins</a
+              >
+            </p>
+          </article>
+          <article class="sidebar-card rainfall-card">
+            <div class="sidebar-card-heading">
+              <span class="sidebar-icon rainfall-icon" aria-hidden="true">
+                <i class="fa-solid fa-cloud-rain"></i>
+              </span>
+              <div>
+                <h3>Rainfall Outlook</h3>
+                <p id="rainfall-period">Burundi average - next 5 days</p>
               </div>
             </div>
+            <p class="rainfall-total" id="rainfall-forecast" aria-live="polite">
+              Loading...
+            </p>
+            <p class="rainfall-total-label">estimated rainfall over 5 days</p>
+            <div class="rainfall-chart-container">
+              <p class="rainfall-chart-unit">Daily average - millimetres</p>
+              <p
+                id="rainfall-chart-status"
+                class="rainfall-chart-status"
+                aria-live="polite"
+              >
+                Waiting for forecast data...
+              </p>
+              <ul
+                id="rainfall-chart-values"
+                class="rainfall-chart-values"
+                aria-label="Rainfall forecast by day"
+              ></ul>
+            </div>
+            <a
+              class="card-source-link"
+              href="https://open-meteo.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Forecast source
+              <i
+                class="fa-solid fa-arrow-up-right-from-square"
+                aria-hidden="true"
+              ></i
+            ></a>
+          </article>
+        </section>
 
-            <!-- Drought -->
-            <div class="stat-row">
-              <div class="stat-header">
-                <span class="label">Drought</span>
-                <span class="value">442K</span>
-              </div>
-              <div class="progress-track">
-                <div class="progress-fill drought"></div>
+        <section class="sidebar-section" aria-labelledby="environment-title">
+          <h2 class="sidebar-section-title" id="environment-title">
+            <i class="fa-solid fa-earth-africa" aria-hidden="true"></i>
+            Environmental conditions
+          </h2>
+          <article
+            class="sidebar-card air-quality-card"
+            aria-labelledby="air-quality-title"
+          >
+            <div class="sidebar-card-heading">
+              <span class="sidebar-icon air-icon" aria-hidden="true">
+                <i class="fa-solid fa-wind"></i>
+              </span>
+              <div>
+                <h3 id="air-quality-title">Air quality near Kibira</h3>
+                <p>Local model estimate</p>
               </div>
             </div>
-          </div>
-        </div>
+            <div class="air-quality-overview">
+              <div class="aqi-reading">
+                <strong id="kibira-aqi">—</strong>
+                <span>US AQI - 0–500</span>
+              </div>
+              <div class="aqi-interpretation">
+                <p
+                  class="aqi-category"
+                  id="kibira-aqi-category"
+                  aria-live="polite"
+                >
+                  Checking...
+                </p>
+                <p class="card-explanation" id="kibira-air-quality-status">
+                  Loading the latest air-quality estimate...
+                </p>
+              </div>
+            </div>
+            <div class="air-quality-details">
+              <p class="pm25-reading" id="kibira-pm25">PM2.5: —</p>
+              <p id="kibira-air-quality-update">
+                Not a ground-station measurement
+              </p>
+            </div>
+            <div class="air-quality-footer">
+              <span>Follow local health guidance.</span>
+              <a
+                href="https://open-meteo.com/en/docs/air-quality-api"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Data source</a
+              >
+            </div>
+          </article>
+          <article class="sidebar-card vegetation-card">
+            <div class="sidebar-card-heading">
+              <span class="sidebar-icon vegetation-icon" aria-hidden="true">
+                <i class="fa-solid fa-leaf"></i>
+              </span>
+              <div>
+                <h3>Vegetation health</h3>
+                <p>Burundi - satellite indicator</p>
+              </div>
+            </div>
+            <div class="vegetation-reading">
+              <strong id="ndvi-value" aria-live="polite">Loading...</strong>
+              <span>NDVI - vegetation greenness</span>
+            </div>
+            <div class="card-meta-row">
+              <p id="ndvi-observation">NASA PACE - Burundi Data</p>
+              <a
+                href="https://gis.earthdata.nasa.gov/portal/rest/services/GESDISC/PACE_OCI_L3M_LANDVI/ImageServer"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Source</a
+              >
+            </div>
+          </article>
+        </section>
+
+        <section class="sidebar-section" aria-labelledby="monitoring-title">
+          <h2 class="sidebar-section-title" id="monitoring-title">
+            <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
+            Monitoring network
+          </h2>
+          <article class="sidebar-card station-card">
+            <div class="sidebar-card-heading">
+              <span class="sidebar-icon station-icon" aria-hidden="true">
+                <i class="fa-solid fa-location-dot"></i>
+              </span>
+              <div>
+                <h3>Meteorological stations</h3>
+                <p>Stations shown on the map</p>
+              </div>
+              <strong class="station-count" id="hydrological-station-count"
+                >63</strong
+              >
+            </div>
+            <p class="card-explanation">24 automatic stations</p>
+          </article>
+          <article class="sidebar-card water-level-card">
+            <div class="sidebar-card-heading">
+              <span class="sidebar-icon water-icon" aria-hidden="true">
+                <i class="fa-solid fa-water"></i>
+              </span>
+              <div>
+                <h3>Lake Tanganyika level</h3>
+                <p>Live reading</p>
+              </div>
+            </div>
+            <p class="unavailable-reading" id="lake-level">Unavailable</p>
+            <div class="card-meta-row">
+              <p>No verified live public feed</p>
+              <a
+                href="https://www.igebu.bi/Services/hydrologie/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >IGEBU hydrology</a
+              >
+            </div>
+          </article>
+        </section>
       </div>
     </section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
-      var map = L.map("map", { preferCanvas: true }).setView([-3.3731, 29.9189], 9);
+      var map = L.map("map", { preferCanvas: true }).setView(
+        [-3.3731, 29.9189],
+        9,
+      );
 
       const esri = L.tileLayer(
         "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
@@ -318,7 +411,9 @@
         .then((response) => response.json())
         .then((data) => {
           const stationCount = data.features.length;
-          const stationCountElement = document.querySelector(".div2 .number");
+          const stationCountElement = document.getElementById(
+            "hydrological-station-count",
+          );
           if (stationCountElement) {
             animateNumber(stationCountElement, 0, stationCount, 2000);
           }
@@ -351,6 +446,7 @@
         })
         .catch((error) => console.error("Error loading GeoJSON data:", error));
     </script>
+    <script src="js/dashboard.js"></script>
     <script src="js/utils.js"></script>
   </body>
 </html>

@@ -197,7 +197,10 @@
       fetch("data/burundi.geojson")
         .then((response) => response.json())
         .then((data) => {
-          L.geoJSON(data).addTo(map);
+          L.geoJSON(data, {
+            interactive: false,
+            style: { fillOpacity: 0 },
+          }).addTo(map);
         });
 
       //fetch a map of protected areas

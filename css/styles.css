@@ -583,40 +583,143 @@ body {
 .div3 {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  grid-row-start: 2;
-  height: 150px;
+  gap: 12px;
+  grid-column: 1 / -1;
+  height: auto;
+  min-height: 150px;
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   background-color: var(--secondary-color);
-  padding: 10px;
+  padding: 14px;
 }
 .div3 i {
-  font-size: 18px;
-  color: green;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  border-radius: 10px;
+  background: #e7f2ea;
+  color: #257442;
+  font-size: 16px;
 }
 .div3 .number {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: bold;
   color: var(--primary-text);
 }
 .div3 .title-box {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--primary-text);
-  font-weight: 400;
+  font-weight: 600;
 }
 .div3 .txt-box {
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--text-light);
+}
+.air-quality-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.air-quality-eyebrow {
+  margin-bottom: 3px;
+  color: var(--text-light);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.air-quality-overview {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.aqi-reading {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  align-items: center;
+  min-width: 66px;
+  padding-right: 14px;
+  border-right: 1px solid var(--border-color);
+}
+.aqi-reading span {
+  color: var(--text-light);
+  font-size: 11px;
+}
+.aqi-interpretation {
+  min-width: 0;
+}
+.aqi-category {
+  display: inline-flex;
+  margin-bottom: 5px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: #eef1f3;
+  color: #43525a;
+  font-size: 12px;
+  font-weight: 700;
+}
+.aqi-category[data-level="good"] {
+  background: #e3f4e8;
+  color: #226b39;
+}
+.aqi-category[data-level="moderate"] {
+  background: #fff3cf;
+  color: #795800;
+}
+.aqi-category[data-level="sensitive"] {
+  background: #ffead7;
+  color: #884600;
+}
+.aqi-category[data-level="unhealthy"],
+.aqi-category[data-level="very-unhealthy"] {
+  background: #fce3e3;
+  color: #9a2929;
+}
+.aqi-category[data-level="hazardous"] {
+  background: #eee2f7;
+  color: #612b82;
+}
+.aqi-category[data-level="unavailable"] {
+  background: #eef1f3;
+  color: #43525a;
+}
+.air-quality-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding-top: 9px;
+  color: var(--text-light);
+  font-size: 11px;
+}
+.pm25-reading {
+  color: var(--primary-text);
+  font-weight: 600;
+}
+.air-quality-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--text-light);
+  font-size: 10px;
+}
+.air-quality-footer a {
+  flex: 0 0 auto;
+  color: #2581c1;
 }
 
 .div4 {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  grid-row-start: 2;
-  height: 150px;
+  grid-column: 1 / -1;
+  height: auto;
+  min-height: 100px;
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -712,6 +815,7 @@ body {
   border-radius: 8px;
   background-color: rgb(248, 228, 190);
   color: orange;
+  text-decoration: none;
 }
 .container2 {
   height: auto;
@@ -754,6 +858,72 @@ body {
 .container3 .content .subtxt {
   font-size: 12px;
   color: var(--text-light);
+}
+
+.rainfall-chart-container {
+  padding-top: 2px;
+}
+
+.rainfall-chart-unit {
+  margin-bottom: 6px;
+  color: var(--text-light);
+  font-size: 11px;
+}
+
+.rainfall-chart-status {
+  color: var(--text-light);
+  font-size: 12px;
+}
+
+.rainfall-chart-values {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+  margin: 0;
+  list-style: none;
+}
+
+.rainfall-day {
+  display: grid;
+  min-width: 0;
+  grid-template-rows: 18px 96px 28px;
+  justify-items: center;
+  align-items: end;
+}
+
+.rainfall-day-value {
+  align-self: center;
+  color: var(--primary-text);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rainfall-day-track {
+  display: flex;
+  width: 100%;
+  max-width: 28px;
+  height: 100%;
+  align-items: flex-end;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+  background: #f1f5f9;
+}
+
+.rainfall-day-bar {
+  display: block;
+  width: 100%;
+  min-height: 2px;
+  border-radius: 5px 5px 0 0;
+  background: #2581c1;
+}
+
+.rainfall-day-date {
+  align-self: center;
+  color: var(--primary-text);
+  font-size: 10px;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .bottom-content {
@@ -813,8 +983,370 @@ body {
   width: 24%;
   background-color: #e06616; /* Orange */
 }
-
 .drought {
   width: 35%;
   background-color: #d99b1c; /* Yellow/Gold */
+}
+
+.mainbar {
+  width: 56%;
+}
+
+.sidebar-right {
+  width: 24%;
+  padding: 18px 14px 28px;
+  background: #f5f8f9;
+}
+
+.dashboard-sidebar-header {
+  margin: 0 0 22px;
+  padding: 0 2px 16px;
+  border-bottom: 1px solid #dfe7e9;
+}
+
+.dashboard-sidebar-header p {
+  margin-bottom: 6px;
+  color: #64777e;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.dashboard-sidebar-header h1 {
+  margin-bottom: 4px;
+  color: #203b45;
+  font-size: 21px;
+  font-weight: 650;
+}
+
+.dashboard-sidebar-header span {
+  color: #64777e;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.sidebar-section {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.sidebar-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 2px;
+  color: #52656c;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sidebar-section-title i {
+  color: #748990;
+  font-size: 12px;
+}
+
+.sidebar-card {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #e2e9eb;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(15, 40, 50, 0.045);
+}
+
+.sidebar-card-heading {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar-card-heading > div {
+  min-width: 0;
+  flex: 1;
+}
+
+.sidebar-card-heading h3 {
+  margin: 0;
+  color: #263e47;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.sidebar-card-heading p {
+  margin-top: 3px;
+  color: #718087;
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.sidebar-icon {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.flood-icon {
+  background: #fff0ec;
+  color: #bf4938;
+}
+
+.rainfall-icon,
+.water-icon {
+  background: #e8f2fb;
+  color: #2877ad;
+}
+
+.air-icon,
+.vegetation-icon {
+  background: #e8f3eb;
+  color: #287044;
+}
+
+.station-icon {
+  background: #f0edfb;
+  color: #6554a4;
+}
+
+.alert-count,
+.station-count {
+  color: #263e47;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card-explanation {
+  margin-top: 11px;
+  color: #596c73;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.card-explanation a,
+.card-meta-row a,
+.card-source-link,
+.air-quality-footer a {
+  color: #176ea0;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.card-explanation a:hover,
+.card-meta-row a:hover,
+.card-source-link:hover,
+.air-quality-footer a:hover {
+  text-decoration: underline;
+}
+
+.rainfall-total {
+  margin-top: 14px;
+  color: #203b45;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.rainfall-total-label {
+  margin-top: 3px;
+  color: #64777e;
+  font-size: 11px;
+}
+
+.rainfall-chart-container {
+  margin-top: 13px;
+  padding-top: 11px;
+  border-top: 1px solid #edf1f2;
+}
+
+.rainfall-chart-unit {
+  margin-bottom: 8px;
+  color: #64777e;
+  font-size: 11px;
+}
+
+.rainfall-chart-values {
+  gap: 8px;
+}
+
+.rainfall-day {
+  grid-template-rows: 18px 76px 24px;
+}
+
+.rainfall-day-value {
+  color: #354f59;
+  font-size: 10px;
+}
+
+.rainfall-day-track {
+  max-width: 24px;
+}
+
+.rainfall-day-date {
+  color: #64777e;
+  font-size: 10px;
+}
+
+.card-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 12px;
+  font-size: 11px;
+}
+
+.air-quality-overview {
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.aqi-reading {
+  min-width: 78px;
+  padding-right: 12px;
+  align-items: flex-start;
+}
+
+.aqi-reading strong {
+  color: #203b45;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.aqi-reading span {
+  margin-top: 4px;
+  color: #64777e;
+  font-size: 10px;
+}
+
+.aqi-category {
+  max-width: 100%;
+  margin-bottom: 6px;
+  white-space: normal;
+  line-height: 1.35;
+}
+
+.air-quality-details,
+.air-quality-footer,
+.card-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 10px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #edf1f2;
+  color: #64777e;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.air-quality-details .pm25-reading {
+  color: #354f59;
+  font-size: 11px;
+}
+
+.air-quality-footer {
+  margin-top: 8px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.air-quality-footer a,
+.card-meta-row a {
+  font-size: 10px;
+}
+
+.vegetation-reading {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 13px;
+}
+
+.vegetation-reading strong {
+  color: #203b45;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.vegetation-reading span {
+  color: #64777e;
+  font-size: 11px;
+}
+
+.card-meta-row p {
+  min-width: 0;
+}
+
+.station-card .card-explanation {
+  margin-top: 10px;
+  padding-left: 46px;
+}
+
+.unavailable-reading {
+  margin-top: 13px;
+  color: #64777e;
+  font-size: 17px;
+  font-weight: 650;
+}
+
+@media (max-width: 1100px) {
+  .sidebar-right {
+    width: 28%;
+    padding-right: 11px;
+    padding-left: 11px;
+  }
+
+  .mainbar {
+    width: 52%;
+  }
+}
+
+@media (max-width: 760px) {
+  .sidebar-right {
+    width: 34%;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .mainbar {
+    width: 46%;
+  }
+
+  .sidebar-card {
+    padding: 11px;
+  }
+
+  .sidebar-card-heading {
+    gap: 7px;
+  }
+
+  .sidebar-icon {
+    width: 31px;
+    height: 31px;
+    flex-basis: 31px;
+    font-size: 13px;
+  }
+
+  .sidebar-card-heading h3 {
+    font-size: 12px;
+  }
+
+  .sidebar-card-heading p,
+  .card-explanation {
+    font-size: 10px;
+  }
 }
