@@ -13,7 +13,7 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/province.css" />
-    <title>Province - Burundi Environmental Monitoring Platform</title>
+    <title>Communes - Burundi Environmental Monitoring Platform</title>
   </head>
   <body>
     <header class="topbar">
@@ -23,7 +23,7 @@
         </label>
         <div class="search-box">
           <i class="fas fa-search"></i>
-          <input type="text" placeholder="Search stations, provinces..." />
+          <input type="text" placeholder="Search stations, communes..." />
         </div>
       </div>
       <div class="topbar-center">
@@ -64,7 +64,7 @@
             </li>
             <li>
               <a class="menu-item active" href="province.html"
-                ><i class="fa-solid fa-globe"></i> Provinces</a
+                ><i class="fa-solid fa-globe"></i> Communes</a
               >
             </li>
             <li>
@@ -96,34 +96,38 @@
       </div>
       <div class="sidebar-right">
         <div class="overview">
-          <h1 class="overview-head">Province details</h1>
-          <p class="overview-content" id="province-name">Select a province</p>
+          <h1 class="overview-head">Commune details</h1>
+          <p class="overview-content" id="commune-name">Select a commune</p>
           <p
             class="overview-hint"
-            id="province-prompt"
+            id="commune-prompt"
             role="status"
             aria-live="polite"
           >
-            Click on a province to see the details.
+            Click on a commune to see the details.
           </p>
         </div>
-        <div class="contSidebar" aria-label="Province data">
+        <div class="contSidebar" aria-label="Commune data">
           <div class="sectionSidebar">
             <i class="fa-solid fa-map"></i>
             <h3 class="section-head">Administrative data</h3>
           </div>
           <div class="section-content">
             <div class="box-result">
-              <p class="para-section">Type:</p>
-              <p class="para-result" id="province-type">—</p>
+              <p class="para-section">Province:</p>
+              <p class="para-result" id="commune-province">—</p>
             </div>
             <div class="box-result">
-              <p class="para-section">Administrative ID:</p>
-              <p class="para-result" id="province-id">—</p>
+              <p class="para-section">Commune code:</p>
+              <p class="para-result" id="commune-code">—</p>
+            </div>
+            <div class="box-result">
+              <p class="para-section">Population (2024):</p>
+              <p class="para-result" id="commune-population">—</p>
             </div>
           </div>
         </div>
-        <div class="contSidebar" aria-label="Province climate">
+        <div class="contSidebar" aria-label="Commune climate">
           <div class="sectionSidebar">
             <i class="fa-solid fa-cloud-rain"></i>
             <h3 class="section-head">Climate</h3>
@@ -143,7 +147,7 @@
               role="status"
               aria-live="polite"
             >
-              Weather appears when a province is selected.
+              Weather appears when a commune is selected.
             </p>
           </div>
         </div>

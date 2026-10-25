@@ -64,7 +64,7 @@
             </li>
             <li>
               <a class="menu-item" href="province.html"
-                ><i class="fa-solid fa-globe"></i> Provinces</a
+                ><i class="fa-solid fa-globe"></i> Communes</a
               >
             </li>
             <li>
@@ -255,19 +255,74 @@
         })
         .addTo(map);
 
-      const defaultProvinceStyle = {
-        color: "#3388ff",
-        weight: 2,
-        fillColor: "#3388ff",
-        fillOpacity: 0.2,
+      const populationRanges = [
+        { limit: 2200000, color: "#fee08b" },
+        { limit: 2400000, color: "#fdae61" },
+        { limit: 2700000, color: "#f46d43" },
+        { limit: Infinity, color: "#d73027" },
+      ];
+      const noPopulationColor = "#cbd5e1";
+
+      function getProvincePopulation(properties) {
+        const population = Number(properties?.POP_TOTAL);
+        return Number.isFinite(population) && population > 0
+          ? population
+          : null;
+      }
+
+      function getProvinceStyle(feature) {
+        const population = getProvincePopulation(feature?.properties);
+        const range = populationRanges.find(
+          ({ limit }) => population !== null && population <= limit,
+        );
+        return {
+          color: "#64748b",
+          weight: 1.5,
+          fillColor: range?.color || noPopulationColor,
+          fillOpacity: 0.72,
+        };
+      }
+
+      const populationLegend = L.control({ position: "bottomleft" });
+      populationLegend.onAdd = function () {
+        const div = L.DomUtil.create("div", "population-legend");
+        const formatPopulation = new Intl.NumberFormat();
+        const ranges = [
+          { label: `Up to ${formatPopulation.format(2200000)}`, color: "#fee08b" },
+          {
+            label: `${formatPopulation.format(2200001)}–${formatPopulation.format(2400000)}`,
+            color: "#fdae61",
+          },
+          {
+            label: `${formatPopulation.format(2400001)}–${formatPopulation.format(2700000)}`,
+            color: "#f46d43",
+          },
+          {
+            label: `More than ${formatPopulation.format(2700000)}`,
+            color: "#d73027",
+          },
+          { label: "No population data", color: noPopulationColor },
+        ];
+
+        const title = L.DomUtil.create("h3", "", div);
+        title.textContent = "Province population";
+        const note = L.DomUtil.create("p", "population-legend-note", div);
+        note.textContent = "Total residents · 2024 census";
+
+        const list = L.DomUtil.create("ul", "", div);
+        ranges.forEach(({ label, color }) => {
+          const item = L.DomUtil.create("li", "", list);
+          const swatch = L.DomUtil.create("span", "population-legend-swatch", item);
+          swatch.style.backgroundColor = color;
+          const text = L.DomUtil.create("span", "", item);
+          text.textContent = label;
+        });
+
+        L.DomEvent.disableClickPropagation(div);
+        L.DomEvent.disableScrollPropagation(div);
+        return div;
       };
-      const selectedProvinceStyle = {
-        ...defaultProvinceStyle,
-        color: "#f08c28",
-        weight: 3,
-        fillColor: "#f08c28",
-        fillOpacity: 0.4,
-      };
+      populationLegend.addTo(map);
       const provinceName = document.getElementById("province-name");
       const provincePrompt = document.getElementById("province-prompt");
       const provinceCode = document.getElementById("province-code");
@@ -405,14 +460,21 @@
         if (selectedProvince) {
           provinceLayer.resetStyle(selectedProvince);
         }
-        selectedProvince = layer;
-        layer.setStyle(selectedProvinceStyle);
-
         const properties = feature.properties || {};
+        selectedProvince = layer;
+        layer.setStyle({
+          ...getProvinceStyle(feature),
+          color: "#172c33",
+          weight: 3,
+        });
         provinceName.textContent = properties.PROVINCES || "Unknown province";
         provincePrompt.textContent = "Province boundary selected.";
         provinceCode.textContent = properties.CODPROVINC ?? "Not available";
         updatePopulation(properties);
+        const population = getProvincePopulation(properties);
+        if (population !== null) {
+          populationStatus.textContent = `2024 census total · ${formatNumber(population)} residents.`;
+        }
         unavailableMetricIds.forEach((id) => {
           document.getElementById(id).textContent = "Not available";
         });
@@ -429,7 +491,7 @@
         })
         .then((data) => {
           provinceLayer = L.geoJSON(data, {
-            style: defaultProvinceStyle,
+            style: getProvinceStyle,
             smoothFactor: 2,
             onEachFeature(feature, layer) {
               layer.bindTooltip(feature.properties.PROVINCES || "Province", {

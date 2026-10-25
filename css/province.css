@@ -101,6 +101,66 @@
   text-align: right;
   overflow-wrap: anywhere;
 }
+
+.commune-population-legend {
+  min-width: 205px;
+  padding: 12px 14px;
+  border: 1px solid rgba(82, 101, 108, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 10px rgba(15, 40, 50, 0.15);
+  color: #263e47;
+}
+
+.commune-population-legend h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.commune-population-legend-note {
+  margin: 3px 0 9px;
+  color: #64777e;
+  font-size: 13px;
+}
+
+.commune-population-legend ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.commune-population-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #43565e;
+  font-size: 11px;
+}
+
+.commune-population-legend-swatch {
+  width: 16px;
+  height: 13px;
+  flex: 0 0 16px;
+  border: 1px solid rgba(38, 62, 71, 0.28);
+  border-radius: 3px;
+}
+
+.commune-population-legend-source {
+  display: inline-block;
+  margin-top: 10px;
+  color: #176ea0;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.commune-population-legend-source:hover {
+  text-decoration: underline;
+}
+
 .detailed {
   padding: 0.8rem 1.2rem;
   border-radius: 8px;
