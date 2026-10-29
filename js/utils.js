@@ -25,7 +25,7 @@ function updateDateTime() {
   const hours = String(now.getHours()).padStart(2, "0");
   const minutes = String(now.getMinutes()).padStart(2, "0");
 
-  dateElement.textContent = `${day} ${month} ${year} · ${hours}:${minutes}`;
+  dateElement.textContent = `${day} ${month} ${year} - ${hours}:${minutes}`;
 }
 
 // Update on page load

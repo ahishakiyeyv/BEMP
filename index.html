@@ -31,7 +31,7 @@
       </div>
       <div class="topbar-center">
         <div class="topbar-info">
-          <span class="topbar-date">08 Jun 2026 · 16:40</span>
+          <span class="topbar-date">08 Jun 2026 - 16:40</span>
           <button class="location-btn">
             <i class="fas fa-map-marker-alt"></i>
             Burundi
@@ -109,26 +109,47 @@
             <i class="fa-solid fa-bell" aria-hidden="true"></i>
             Priority updates
           </h2>
-          <article class="sidebar-card flood-card">
+          <article
+            class="sidebar-card live-alert-card"
+            id="live-alert-card"
+            data-alert-state="loading"
+          >
             <div class="sidebar-card-heading">
-              <span class="sidebar-icon flood-icon" aria-hidden="true">
-                <i class="fa-solid fa-triangle-exclamation"></i>
+              <span class="sidebar-icon alert-icon" aria-hidden="true">
+                <i
+                  class="fa-solid fa-triangle-exclamation"
+                  aria-hidden="true"
+                ></i>
               </span>
               <div>
-                <h3>Flood alerts</h3>
-                <p>Burundi - current status</p>
+                <h3>IGEBU weather alerts</h3>
+                <p>Active alerts on the official website</p>
               </div>
-              <strong class="alert-count" id="flood-alert-count">N/A</strong>
             </div>
-            <p class="card-explanation" id="flood-alert-status">
-              No structured live alert feed is available.
-              <a
-                href="https://www.igebu.bi/produits/prevision-hebdomadaire/"
-                target="_blank"
-                rel="noopener noreferrer"
-                >View IGEBU bulletins</a
-              >
+            <p
+              class="live-alert-status"
+              id="live-alert-status"
+              data-level="loading"
+              aria-live="polite"
+            >
+              Checking for active IGEBU alerts...
             </p>
+            <p
+              class="live-alert-detail"
+              id="live-alert-detail"
+              aria-live="polite"
+            ></p>
+            <a
+              class="card-source-link live-alert-link"
+              href="https://www.igebu.bi/alerte/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >View details on IGEBU
+              <i
+                class="fa-solid fa-arrow-up-right-from-square"
+                aria-hidden="true"
+              ></i
+            ></a>
           </article>
           <article class="sidebar-card rainfall-card">
             <div class="sidebar-card-heading">
@@ -251,6 +272,84 @@
           </article>
         </section>
 
+        <section
+          class="sidebar-section"
+          aria-labelledby="population-context-title"
+        >
+          <h2 class="sidebar-section-title" id="population-context-title">
+            <i class="fa-solid fa-people-group" aria-hidden="true"></i>
+            Population context
+          </h2>
+          <article
+            class="sidebar-card age-profile-card"
+            aria-labelledby="population-context-title"
+          >
+            <div class="age-profile-heading">
+              <h3>National age profile</h3>
+              <span>2024 census</span>
+            </div>
+            <div
+              class="age-profile-bar"
+              role="img"
+              aria-label="National ordinary-household population: 45.1 percent aged 0 to 14, 49.3 percent aged 15 to 59, and 5.6 percent aged 60 or older"
+            >
+              <span
+                class="age-profile-segment age-profile-children"
+                style="width: 45.1%"
+              ></span>
+              <span
+                class="age-profile-segment age-profile-working"
+                style="width: 49.3%"
+              ></span>
+              <span
+                class="age-profile-segment age-profile-older"
+                style="width: 5.6%"
+              ></span>
+            </div>
+            <ul class="age-profile-list">
+              <li>
+                <span class="age-profile-label">
+                  <span class="age-profile-key age-profile-children"></span>
+                  Ages 0–14
+                </span>
+                <span class="age-profile-value">
+                  <strong>45.1%</strong>
+                  <small>5,505,806 people</small>
+                </span>
+              </li>
+              <li>
+                <span class="age-profile-label">
+                  <span class="age-profile-key age-profile-working"></span>
+                  Ages 15–59
+                </span>
+                <span class="age-profile-value">
+                  <strong>49.3%</strong>
+                  <small>6,027,615 people</small>
+                </span>
+              </li>
+              <li>
+                <span class="age-profile-label">
+                  <span class="age-profile-key age-profile-older"></span>
+                  Ages 60+
+                </span>
+                <span class="age-profile-value">
+                  <strong>5.6%</strong>
+                  <small>687,513 people</small>
+                </span>
+              </li>
+            </ul>
+            <div class="age-profile-source">
+              <span>RGPHAE 2024 - ordinary households</span>
+              <a
+                href="https://www.insbu.bi/PopulationAgeGroupPageGrand"
+                target="_blank"
+                rel="noopener noreferrer"
+                >INSBU source</a
+              >
+            </div>
+          </article>
+        </section>
+
         <section class="sidebar-section" aria-labelledby="monitoring-title">
           <h2 class="sidebar-section-title" id="monitoring-title">
             <i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i>
@@ -295,7 +394,6 @@
         </section>
       </div>
     </section>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
       var map = L.map("map", { preferCanvas: true }).setView(
@@ -418,6 +516,24 @@
             animateNumber(stationCountElement, 0, stationCount, 2000);
           }
           L.geoJSON(data, {
+            pointToLayer: function (feature, latlng) {
+              const statusClass = feature.properties.status
+                .toLowerCase()
+                .replace(/\s+/g, "-");
+              const icon = L.divIcon({
+                className: "station-map-marker-container",
+                html: `<span class="station-map-marker ${statusClass}"><i class="fa-solid fa-tower-broadcast" aria-hidden="true"></i></span>`,
+                iconSize: [32, 32],
+                iconAnchor: [16, 16],
+                popupAnchor: [0, -16],
+              });
+              return L.marker(latlng, {
+                icon,
+                title: feature.properties.name,
+                alt: `${feature.properties.name} meteorological station`,
+                keyboard: true,
+              });
+            },
             onEachFeature: function (feature, layer) {
               const statusClass = feature.properties.status
                 .toLowerCase()

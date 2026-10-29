@@ -13,9 +13,78 @@ const kibiraPm25Element = document.getElementById("kibira-pm25");
 const kibiraAirQualityUpdateElement = document.getElementById(
   "kibira-air-quality-update",
 );
+const liveAlertStatusElement = document.getElementById("live-alert-status");
+const liveAlertDetailElement = document.getElementById("live-alert-detail");
+const liveAlertCardElement = document.getElementById("live-alert-card");
 const BURUNDI_TIME_ZONE = "Africa/Bujumbura";
 const FORECAST_GRID_SPACING = 0.12;
 const FORECAST_BATCH_SIZE = 50;
+const IGEBU_ALERTS_PAGE_URL = "https://www.igebu.bi/alerte/";
+const IGEBU_PAGE_READER_URL = "https://r.jina.ai/";
+const LIVE_ALERT_REFRESH_INTERVAL = 15 * 60 * 1000;
+let isRefreshingLiveAlerts = false;
+
+async function loadLiveIGEBUAlertCount() {
+  const response = await fetch(
+    `${IGEBU_PAGE_READER_URL}${IGEBU_ALERTS_PAGE_URL}`,
+    {
+      headers: {
+        "x-respond-with": "html",
+        "x-no-cache": "true",
+      },
+      cache: "no-store",
+    },
+  );
+  if (!response.ok) {
+    throw new Error(`IGEBU alerts page returned ${response.status}`);
+  }
+
+  const html = await response.text();
+  const page = new DOMParser().parseFromString(html, "text/html");
+  const activeAlertsGroup = [...page.querySelectorAll(".alerts-group")].find(
+    (group) =>
+      group.querySelector(".group-title")?.textContent.trim().toLowerCase() ===
+      "alertes actives",
+  );
+  if (!activeAlertsGroup) {
+    throw new Error("IGEBU page did not contain its active-alert section");
+  }
+
+  const count = activeAlertsGroup.querySelectorAll(".alert-link").length;
+  const checkedAt = new Intl.DateTimeFormat("en-GB", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: BURUNDI_TIME_ZONE,
+  }).format(new Date());
+  liveAlertStatusElement.dataset.level = count > 0 ? "active" : "clear";
+  liveAlertCardElement.dataset.alertState = count > 0 ? "active" : "clear";
+  liveAlertStatusElement.textContent =
+    count === 1
+      ? "1 active alert on the IGEBU website."
+      : `${count} active alerts on the IGEBU website.`;
+  liveAlertDetailElement.textContent = `Checked ${checkedAt} (Burundi time).`;
+}
+
+async function refreshLiveIGEBUAlerts() {
+  if (isRefreshingLiveAlerts) return;
+  isRefreshingLiveAlerts = true;
+  try {
+    await loadLiveIGEBUAlertCount();
+  } catch (error) {
+    console.error("Unable to load the active IGEBU alert count:", error);
+    liveAlertStatusElement.dataset.level = "unavailable";
+    liveAlertCardElement.dataset.alertState = "unavailable";
+    liveAlertStatusElement.textContent =
+      "The active alert count is temporarily unavailable.";
+    liveAlertDetailElement.textContent =
+      "Visit the IGEBU website for the current alert list.";
+  } finally {
+    isRefreshingLiveAlerts = false;
+  }
+}
+
+refreshLiveIGEBUAlerts();
+window.setInterval(refreshLiveIGEBUAlerts, LIVE_ALERT_REFRESH_INTERVAL);
 
 function renderRainfallChart(days, formatDate) {
   rainfallChartStatus.hidden = true;
@@ -46,6 +115,47 @@ function renderRainfallChart(days, formatDate) {
       return item;
     }),
   );
+}
+
+function millisecondsUntilNextBurundiMidnight(now = new Date()) {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    timeZone: BURUNDI_TIME_ZONE,
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hourCycle: "h23",
+  });
+  const getDateParts = (date) =>
+    Object.fromEntries(
+      formatter
+        .formatToParts(date)
+        .filter(({ type }) => type !== "literal")
+        .map(({ type, value }) => [type, Number(value)]),
+    );
+  const localDate = getDateParts(now);
+  const nextDate = new Date(
+    Date.UTC(localDate.year, localDate.month - 1, localDate.day + 1),
+  );
+  const nextMidnightAsUtc = Date.UTC(
+    nextDate.getUTCFullYear(),
+    nextDate.getUTCMonth(),
+    nextDate.getUTCDate(),
+  );
+  const nextMidnightParts = getDateParts(new Date(nextMidnightAsUtc));
+  const offset =
+    Date.UTC(
+      nextMidnightParts.year,
+      nextMidnightParts.month - 1,
+      nextMidnightParts.day,
+      nextMidnightParts.hour,
+      nextMidnightParts.minute,
+      nextMidnightParts.second,
+    ) - nextMidnightAsUtc;
+
+  return nextMidnightAsUtc - offset - now.getTime();
 }
 
 async function loadNdvi() {
@@ -179,7 +289,7 @@ async function loadKibiraAirQuality() {
   kibiraAirQualityStatusElement.textContent = aqiDetails.guidance;
   kibiraPm25Element.textContent = `PM2.5: ${pm25.toFixed(1)} µg/m³`;
   kibiraAirQualityUpdateElement.textContent =
-    `CAMS model estimate · updated ${time} - not a ground-station measurement`;
+    `CAMS model estimate - updated ${time} - not a ground-station measurement`;
 }
 
 function getCoordinateBounds(coordinates, bounds = [Infinity, Infinity, -Infinity, -Infinity]) {
@@ -277,6 +387,7 @@ async function fetchForecastBatch(locations) {
   });
   const response = await fetch(
     `https://api.open-meteo.com/v1/forecast?${parameters}`,
+    { cache: "no-store" },
   );
   if (!response.ok) {
     throw new Error(`Rainfall forecast returned ${response.status}`);
@@ -354,13 +465,27 @@ async function loadRainfallForecast() {
   renderRainfallChart(days, formatDate);
 }
 
-loadRainfallForecast().catch((error) => {
+function handleRainfallForecastError(error) {
   console.error("Unable to load the Burundi rainfall forecast:", error);
   forecastElement.textContent = "Unavailable";
   forecastPeriodElement.textContent = "Forecast data could not be loaded";
   rainfallChartStatus.hidden = false;
   rainfallChartStatus.textContent = "Daily forecast is unavailable";
-});
+}
+
+function refreshRainfallForecast() {
+  loadRainfallForecast().catch(handleRainfallForecastError);
+}
+
+function scheduleRainfallForecastRefresh() {
+  window.setTimeout(() => {
+    scheduleRainfallForecastRefresh();
+    refreshRainfallForecast();
+  }, millisecondsUntilNextBurundiMidnight());
+}
+
+refreshRainfallForecast();
+scheduleRainfallForecastRefresh();
 
 loadNdvi().catch((error) => {
   console.error("Unable to load the Burundi NDVI value:", error);

@@ -61,6 +61,172 @@ body {
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.population-legend {
+  min-width: 205px;
+  padding: 12px 14px;
+  border: 1px solid rgba(82, 101, 108, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 10px rgba(15, 40, 50, 0.15);
+  color: #263e47;
+  font-family: inherit;
+}
+
+.population-legend h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.population-legend-note {
+  margin: 3px 0 9px;
+  color: #64777e;
+  font-size: 12px;
+}
+
+.population-legend ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.population-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #43565e;
+  font-size: 12px;
+}
+
+.population-legend-swatch {
+  width: 16px;
+  height: 13px;
+  flex: 0 0 16px;
+  border: 1px solid rgba(38, 62, 71, 0.28);
+  border-radius: 3px;
+}
+
+.age-profile-card {
+  border-top: 3px solid #6b7bb8;
+}
+
+.age-profile-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.age-profile-heading h3 {
+  color: #263e47;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.age-profile-heading span {
+  color: #718087;
+  font-size: 12px;
+}
+
+.age-profile-bar {
+  display: flex;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eef2f4;
+}
+
+.age-profile-segment {
+  display: block;
+  height: 100%;
+}
+
+.age-profile-children {
+  background: #e99a42;
+}
+
+.age-profile-working {
+  background: #4586b4;
+}
+
+.age-profile-older {
+  background: #7566a8;
+}
+
+.age-profile-list {
+  display: grid;
+  gap: 12px;
+  margin: 13px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.age-profile-list li,
+.age-profile-label,
+.age-profile-value {
+  display: flex;
+  align-items: center;
+}
+
+.age-profile-list li {
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.age-profile-label {
+  gap: 7px;
+  color: #43565e;
+  font-size: 12px;
+}
+
+.age-profile-key {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+}
+
+.age-profile-value {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 3px 7px;
+  text-align: right;
+}
+
+.age-profile-value strong {
+  color: #263e47;
+  font-size: 12px;
+}
+
+.age-profile-value small {
+  color: #718087;
+  font-size: 10px;
+}
+
+.age-profile-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 20px;
+  color: #718087;
+  font-size: 10px;
+}
+
+.age-profile-source a {
+  color: #176ea0;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.age-profile-source a:hover {
+  text-decoration: underline;
+}
+
 /* Station Popup Container */
 .station-popup {
   min-width: 320px;
@@ -1057,6 +1223,31 @@ body {
   box-shadow: 0 2px 8px rgba(15, 40, 50, 0.045);
 }
 
+.live-alert-card {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.live-alert-card[data-alert-state="active"] {
+  border-color: #e6a49b;
+  background: linear-gradient(145deg, #fff 0%, #fff8f6 100%);
+  box-shadow:
+    0 0 0 1px rgba(181, 54, 42, 0.08),
+    0 5px 16px rgba(181, 54, 42, 0.1);
+}
+
+.live-alert-card[data-alert-state="active"] .sidebar-card-heading h3 {
+  color: #8f3024;
+}
+
+.live-alert-card[data-alert-state="active"] .alert-icon {
+  background: #b5362a;
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(181, 54, 42, 0.12);
+}
+
 .sidebar-card-heading {
   display: flex;
   min-width: 0;
@@ -1094,7 +1285,7 @@ body {
   font-size: 15px;
 }
 
-.flood-icon {
+.alert-icon {
   background: #fff0ec;
   color: #bf4938;
 }
@@ -1116,12 +1307,132 @@ body {
   color: #6554a4;
 }
 
+.station-map-marker-container {
+  border: 0;
+  background: transparent;
+}
+
+.station-map-marker {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #176f78;
+  box-shadow:
+    0 0 0 3px rgba(23, 111, 120, 0.2),
+    0 2px 7px rgba(20, 45, 54, 0.45);
+  color: #fff;
+  font-size: 13px;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.station-map-marker.operational {
+  background: #176f78;
+}
+
+.station-map-marker-container:hover .station-map-marker,
+.station-map-marker-container:focus .station-map-marker {
+  transform: scale(1.16);
+  box-shadow:
+    0 0 0 4px rgba(23, 111, 120, 0.24),
+    0 3px 9px rgba(20, 45, 54, 0.5);
+}
+
 .alert-count,
 .station-count {
   color: #263e47;
   font-size: 25px;
   font-weight: 700;
   line-height: 1;
+}
+
+.live-alert-status {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 9px;
+  margin-top: 13px;
+  padding: 9px 11px;
+  border: 1px solid #e5eaec;
+  border-radius: 8px;
+  background: #f7f9fa;
+  color: #43565e;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.live-alert-status[data-level="active"] {
+  border-color: #efc0b9;
+  background: #fff0ec;
+  color: #b5362a;
+}
+
+.live-alert-status[data-level="active"]::before {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px rgba(181, 54, 42, 0.13);
+  content: "";
+  animation: live-alert-pulse 1.8s ease-out infinite;
+}
+
+@keyframes live-alert-pulse {
+  50% {
+    box-shadow: 0 0 0 7px rgba(181, 54, 42, 0);
+  }
+}
+
+.live-alert-status[data-level="clear"] {
+  border-color: #cfe4d5;
+  background: #f2f8f4;
+  color: #287044;
+}
+
+.live-alert-status[data-level="unavailable"] {
+  border-color: #ead9c5;
+  background: #fbf6ef;
+  color: #8a4c18;
+}
+
+.live-alert-detail {
+  margin-top: 5px;
+  color: #596c73;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.live-alert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 11px;
+  padding: 8px 11px;
+  border-radius: 7px;
+  background: #eaf3f7;
+  font-size: 12px;
+}
+
+.live-alert-card[data-alert-state="active"] .live-alert-link {
+  background: #b5362a;
+  color: #fff;
+}
+
+.live-alert-card[data-alert-state="active"] .live-alert-link:hover {
+  background: #922b22;
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-alert-status[data-level="active"]::before {
+    animation: none;
+  }
 }
 
 .card-explanation {
